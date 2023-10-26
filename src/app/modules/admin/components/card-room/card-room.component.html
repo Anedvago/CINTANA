@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <span
+        [ngStyle]="{ 'background-color': color2, color: color1 }"
+        class="material-symbols-outlined"
+      >
+        bed
+      </span>
+
+      <div class="content">{{ text | titlecase }}</div>
+    </div>
+    <div class="value">{{ numRooms }}</div>
+    <div class="progress-bar">
+      <div
+        class="progress"
+        [ngStyle]="{ 'width.%': porcent, 'background-color': color1 }"
+      ></div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,54 @@
+<table
+  mat-table
+  [dataSource]="data"
+  *ngIf="data != [] && data.length > 0 && data != undefined"
+>
+  <ng-container [matColumnDef]="col" *ngFor="let col of columns; index as i">
+    <th mat-header-cell *matHeaderCellDef class="header">
+      {{ columnsDisplay[i] | titlecase }}
+    </th>
+
+    <td mat-cell *matCellDef="let element">
+      <mat-chip-listbox
+        *ngIf="
+          element[col] == 'Ocupado' ||
+          element[col] == 'Reservado' ||
+          element[col] == 'Agotado' ||
+          element[col] == 'Por Agotar'
+        "
+      >
+        <mat-chip-option
+          [ngClass]="{
+            red: element[col] == 'Ocupado' || element[col] == 'Agotado',
+            yellow: element[col] == 'Reservado' || element[col] == 'Por Agotar'
+          }"
+        >
+          {{ element[col] }}</mat-chip-option
+        >
+      </mat-chip-listbox>
+
+      <span
+        *ngIf="
+          element[col] != 'Ocupado' &&
+          element[col] != 'Reservado' &&
+          element[col] != 'Agotado' &&
+          element[col] != 'Por Agotar'
+        "
+      >
+        {{ element[col] }}
+      </span>
+    </td>
+  </ng-container>
+  <tr
+    mat-header-row
+    *matHeaderRowDef="columns"
+    class="sticky"
+    position="sticky"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: columns"
+    (click)="emitClickTr(row)"
+    [ngClass]="{ active: active == row.id }"
+  ></tr>
+</table>

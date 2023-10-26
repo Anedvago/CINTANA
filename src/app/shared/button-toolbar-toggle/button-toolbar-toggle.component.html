@@ -1,0 +1,19 @@
+<button mat-button (click)="clicked()" [ngClass]="{ active: button.active }">
+  <div class="content-button">
+    <ng-content></ng-content>
+    <span class="material-symbols-outlined"
+      >{{ button.active ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+    </span>
+  </div>
+</button>
+<div *ngIf="button.active" class="container-childrens">
+  <button
+    mat-button
+    *ngFor="let btn of childrens; index as i"
+    (click)="tabClicked(i)"
+    [ngClass]="{ active: btn.active }"
+    class="button-children"
+  >
+    {{ btn.name }}
+  </button>
+</div>

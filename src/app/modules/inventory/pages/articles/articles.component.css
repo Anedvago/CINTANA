@@ -1,0 +1,17 @@
+.container {
+  width: 74vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+app-table {
+  width: 95%;
+  height: 77%;
+  overflow-y: auto;
+}
+app-form-articles {
+  width: 90%;
+  height: 15%;
+}

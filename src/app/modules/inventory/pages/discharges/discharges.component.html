@@ -1,0 +1,35 @@
+<div class="container">
+    <app-form-document (filterByInitialDate)="filterByInitialDate($event)" 
+    (filterByFinalDate)="filterByFinalDate($event)"
+    (filterByRangeDate)="filterByRangeDate($event)"
+    (filterByNumberFacture)="filterByNumberFacture($event)"
+    (quitFilters)="quitFilters()" />
+    <section>
+      <div class="list">
+        <app-table
+          [active]="factureActive"
+          (clickTr)="selectFacture($event)"
+          [columns]="columnsList"
+          [columnsDisplay]="columnsDisplayList"
+          [data]="rowsListF"
+        ></app-table>
+      </div>
+      <div class="content">
+        <div class="table">
+          <app-table
+            [columns]="columnsDetails"
+            [columnsDisplay]="columnsDisplayDetails"
+            [data]="rowsDetails"
+          ></app-table>
+        </div>
+        <div class="totals">
+          <app-table
+            [columns]="columnsTotals"
+            [columnsDisplay]="columnsDisplayTotals"
+            [data]="rowsTotals"
+          ></app-table>
+        </div>
+      </div>
+    </section>
+  </div>
+  

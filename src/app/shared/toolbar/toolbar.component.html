@@ -1,0 +1,26 @@
+<div class="container">
+  <img src="./assets/img/logo.jpg" alt="logo-cintana" />
+
+  <div class="container-buttons">
+    <app-button-toolbar (click)="tabClicked(0)" [button]="buttons[0]">
+      {{ buttons[0].name | titlecase }}
+    </app-button-toolbar>
+    <app-button-toolbar-toggle
+      (click)="tabClicked(1)"
+      [button]="buttons[1]"
+      [childrens]="buttonsDropDownInventory"
+    >
+      {{ buttons[1].name | titlecase }}
+    </app-button-toolbar-toggle>
+    <app-button-toolbar-toggle
+      (click)="tabClicked(2)"
+      [button]="buttons[2]"
+      [childrens]="buttonsDropDownReservations"
+    >
+      {{ buttons[2].name | titlecase }}</app-button-toolbar-toggle
+    >
+    <app-button-toolbar (click)="tabClicked(3)" [button]="buttons[3]">
+      {{ buttons[3].name | titlecase }}</app-button-toolbar
+    >
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="form">
+    <img src="./assets/img/logo.jpg" alt="logo-cintana" />
+    <form>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput type="text" [(ngModel)]="email" name="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+        />
+      </mat-form-field>
+    </form>
+    <app-button-blue (click)="login()">Ingresar</app-button-blue>
+  </div>
+  <img class="banner" src="./assets/img/fondo.png" alt="cabaña" />
+</div>

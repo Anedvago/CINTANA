@@ -1,0 +1,36 @@
+<form>
+  <div class="row">
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Fecha Inicial</mat-label>
+        <input [(ngModel)]="initialDate" name="initialDate" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Fecha Final</mat-label>
+        <input [(ngModel)]="finalDate" name="finalDate" matInput [matDatepicker]="picker2">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row1">
+      <mat-form-field>
+        <mat-label>Num Factura</mat-label>
+        <input matInput [(ngModel)]="numberFacture" name="numberFacture" />
+      </mat-form-field>
+    </div>
+    <app-button-blue class="row1" (pressClick)="filterFacture()">Buscar Factura</app-button-blue>
+    <app-button-blue class="row1">Auditar Factura</app-button-blue>
+  </div>
+  <div class="row">
+    <app-button-blue class="row2">Crear Documento</app-button-blue>
+    <app-button-blue class="row2">Filtrar Categoria</app-button-blue>
+    <app-button-blue class="row2">Eliminar Factura</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitQuitFilters()">Quitar Filtros</app-button-blue>
+  </div>
+</form>

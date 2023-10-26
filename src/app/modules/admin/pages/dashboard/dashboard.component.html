@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="cards">
+    <app-card-room
+      class="indicator"
+      color1="#3D63C7"
+      color2="#ABC3FF"
+      [numRooms]="totalRooms"
+      text="Total Habitaciones"
+    >
+    </app-card-room>
+    <app-card-room
+      class="indicator"
+      color1="#61BD5F"
+      color2="#B4FFB2"
+      [numRooms]="freeRooms"
+      text="Habitaciones Libres"
+    >
+    </app-card-room>
+    <app-card-room
+      class="indicator"
+      color1="#BB4141"
+      color2="#FF8787"
+      [numRooms]="ocupedRooms"
+      text="Habitaciones Ocupadas"
+    >
+    </app-card-room>
+    <app-card-room
+      class="indicator"
+      color1="#F19221"
+      color2="#FFCF96"
+      [numRooms]="reservedRooms"
+      text="Habitaciones Reservadas"
+    >
+    </app-card-room>
+  </div>
+  <div class="block">
+    <div class="graphics">
+      <mat-card class="graphic">
+        <mat-card-content>
+          <app-vertical-bars></app-vertical-bars>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="graphic table-small">
+        <mat-card-content
+          ><app-table
+            [data]="rowsStock"
+            [columns]="columnsStock"
+            [columnsDisplay]="columnsStock"
+          ></app-table
+        ></mat-card-content>
+      </mat-card>
+    </div>
+    <div class="tables">
+      <mat-card class="table">
+        <mat-card-content>
+          <app-table
+            [data]="rowsInd"
+            [columns]="columnsInd"
+            [columnsDisplay]="columnsIndDisplay"
+          ></app-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="container">
+  <app-form-articles type="SERVICE" (createNew)="openDialog()" (quitFilters)="quitFilters()" (filterByCode)="filterByCode($event)"
+    (filterByRef)="filterByRef($event)" (filterByName)="filterByName($event)" />
+  <app-table (clickTr)="editArticle($event)" [columns]="columns" [columnsDisplay]="columnsDisplay"
+    [data]="filterRows" />
+</div>

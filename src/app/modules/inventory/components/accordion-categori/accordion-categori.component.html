@@ -1,0 +1,62 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let dpto of departaments">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ dpto.name | titlecase }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="cont-btn">
+      <button mat-raised-button class="edit" (click)="emitEditCategory(dpto.id,'DEPARTAMENTO',dpto.type)">
+        Editar
+      </button>
+      <button mat-raised-button class="delete" (click)="emitDeleteCategory(dpto.id,'DEPARTAMENTO',dpto.type)">
+        Eliminar
+      </button>
+      <hr>
+    </span>
+    <mat-accordion>
+      <div *ngFor="let section of sections">
+        <div *ngFor="let scc of section">
+          <mat-expansion-panel *ngIf="scc.departament == dpto.id">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ scc.name | titlecase }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <span class="cont-btn">
+              <button mat-raised-button class="edit" (click)="emitEditCategory(scc.id,'SECCION',scc.type)">
+                Editar
+              </button>
+              <button mat-raised-button class="delete" (click)="emitDeleteCategory(scc.id,'SECCION',scc.type)">
+                Eliminar
+              </button>
+              <hr>
+            </span>
+            <mat-accordion>
+              <div *ngFor="let family of families">
+                <div *ngFor="let fam of family">
+                  <mat-expansion-panel *ngIf="fam.section == scc.id">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ fam.name |titlecase}}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <span class="cont-btn">
+                      <button mat-raised-button class="edit" (click)="emitEditCategory(fam.id,'FAMILIA',fam.type)">
+                        Editar
+                      </button>
+                      <button mat-raised-button class="delete" (click)="emitDeleteCategory(fam.id,'FAMILIA',fam.type)">
+                        Eliminar
+                      </button>
+                    </span>
+                  </mat-expansion-panel>
+                </div>
+              </div>
+            </mat-accordion>
+          </mat-expansion-panel>
+        </div>
+      </div>
+    </mat-accordion>
+
+  </mat-expansion-panel>
+</mat-accordion>

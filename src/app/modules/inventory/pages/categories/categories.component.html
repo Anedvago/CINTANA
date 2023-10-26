@@ -1,0 +1,31 @@
+<div class="container">
+  <header>
+    <div class="btn">
+      <app-button-blue (pressClick)="openDialog()"
+        >Crear Categoria</app-button-blue
+      >
+    </div>
+  </header>
+  <main>
+    <section>
+      <h4>Categorias de articulos</h4>
+      <app-accordion-categori
+        (editCategory)="editCategory($event)"
+        (deleteCategory)="deleteCategory($event)"
+        [departaments]="departamentHandler.articlesDptos"
+        [sections]="sectionHandler.articlesSections"
+        [families]="familyHandler.articlesFamilies"
+      />
+    </section>
+    <section>
+      <h4>Categorias de servicios</h4>
+      <app-accordion-categori
+        (editCategory)="editCategory($event)"
+        (deleteCategory)="deleteCategory($event)"
+        [departaments]="departamentHandler.servicesDptos"
+        [sections]="sectionHandler.servicesSections"
+        [families]="familyHandler.servicesFamilies"
+      />
+    </section>
+  </main>
+</div>

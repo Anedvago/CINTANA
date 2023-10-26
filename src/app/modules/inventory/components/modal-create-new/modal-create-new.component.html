@@ -1,0 +1,65 @@
+<div class="container">
+    <form *ngIf="data.newArticle != undefined">
+        <div>
+            <mat-form-field>
+                <mat-label>Codigo</mat-label>
+                <input disabled [(ngModel)]="data.newArticle.id" name="data.newArticle.id" matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Referencia</mat-label>
+                <input [(ngModel)]="data.newArticle.ref" name="data.newArticle.ref" matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input [(ngModel)]="data.newArticle.name" name="data.newArticle.name" matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Precio</mat-label>
+                <input [(ngModel)]="data.newArticle.value" name="data.newArticle.value" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Stock</mat-label>
+                <input [(ngModel)]="data.newArticle.stock" name="data.newArticle.stock" matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Departamento</mat-label>
+                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newArticle.dpto" name="data.newArticle.dpto">
+                    <mat-option *ngFor="let dpto of departaments" [value]="dpto.id">
+                        {{dpto.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Seccion</mat-label>
+                <mat-select (selectionChange)="filterFamily()" [(ngModel)]="data.newArticle.section" name="data.newArticle.section">
+                    <mat-option *ngFor="let scc of sectionsF" [value]="scc.id">
+                        {{scc.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Familia</mat-label>
+                <mat-select [(ngModel)]="data.newArticle.family" name="data.newArticle.family">
+                    <mat-option *ngFor="let fam of familiesF" [value]="fam.id">
+                        {{fam.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+
+
+    <div class="botonera">
+        <app-button-blue *ngIf="data.newArticle.id == undefined" [mat-dialog-close]="data.newArticle">
+            Crear nuevo articulo
+        </app-button-blue>
+        <app-button-blue *ngIf="data.newArticle.id != undefined" [mat-dialog-close]="data.newArticle">
+            Guardar Articulo
+        </app-button-blue>
+        <app-button-blue (pressClick)="deleteArticle()" class="delete" *ngIf="data.newArticle.id != undefined" [mat-dialog-close]="data.newArticle">
+            Eliminar
+        </app-button-blue>
+    </div>
+</div>

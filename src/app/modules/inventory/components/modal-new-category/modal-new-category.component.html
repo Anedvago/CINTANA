@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="contForm">
+        <form>
+            <mat-form-field>
+                <mat-label>Categoria para</mat-label>
+                <mat-select [(ngModel)]="data.newCategory.type" name="data.newCategory.type">
+                    <mat-option *ngFor="let opt of types" [value]="opt.value"> {{opt.name|titlecase}} </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="data.newCategory.type != '' && data.newCategory.type != undefined">
+                <mat-label>Tipo de categoria</mat-label>
+                <mat-select [(ngModel)]="data.newCategory.depth" name="data.newCategory.depth">
+                    <mat-option *ngFor="let opt of categories" [value]="opt"> {{opt|titlecase}} </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="data.newCategory.depth == 'SECCION'||data.newCategory.depth == 'FAMILIA'">
+                <mat-label>Departamento</mat-label>
+                <mat-select (selectionChange)="filterSection()" [(ngModel)]="data.newCategory.departament"
+                    name="data.newCategory.departament">
+                    <mat-option
+                        *ngFor="let dpto of data.newCategory.type == 'A'?articlesDepartaments:servicesDepartaments"
+                        [value]="dpto.id"> {{dpto.name|titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="data.newCategory.depth == 'FAMILIA' ">
+                <mat-label>Seccion</mat-label>
+                <mat-select [(ngModel)]="data.newCategory.section" name="data.newCategory.section">
+                    <mat-option
+                        *ngFor="let scc of data.newCategory.type == 'A'? filteredArtilcesSections : servicesSections"
+                        [value]="scc.id"> {{scc.name|titlecase}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field
+                *ngIf="data.newCategory.depth== 'DEPARTAMENTO'|| data.newCategory.depth == 'SECCION'||data.newCategory.depth == 'FAMILIA'">
+                <mat-label>Nombre de la categoria</mat-label>
+                <input matInput [(ngModel)]="data.newCategory.name" name="data.newCategory.name">
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="contButton">
+        <app-button-blue [mat-dialog-close]="data.newCategory"
+            *ngIf="data.newCategory.depth == 'DEPARTAMENTO'|| data.newCategory.depth == 'SECCION'||data.newCategory.depth == 'FAMILIA'">
+            <span *ngIf="data.newCategory.id == 0">Crear nueva categoria</span>
+            <span *ngIf="data.newCategory.id != 0">Guardar categoria</span>
+        </app-button-blue>
+    </div>
+
+
+</div>

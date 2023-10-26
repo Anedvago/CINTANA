@@ -1,0 +1,12 @@
+.container {
+  width: 74vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+app-card-module {
+  width: 90% !important;
+  height: 18% !important;
+}
