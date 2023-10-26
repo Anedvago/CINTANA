@@ -1,0 +1,27 @@
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.red {
+  background-color: #ff8787 !important;
+}
+.yellow {
+  background-color: #ffcf96 !important;
+}
+th {
+  font-weight: bold;
+}
+mat-chip-option {
+  pointer-events: none;
+}
+tr:hover {
+  background-color: rgb(238, 236, 236);
+}
+.sticky:hover {
+  background-color: white;
+}
+.active {
+  background-color: #3056d3 !important;
+  color: white !important;
+}
