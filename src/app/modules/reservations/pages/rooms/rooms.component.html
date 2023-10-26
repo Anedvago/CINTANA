@@ -1,1 +1,13 @@
-<p>rooms works!</p>
+<div class="container">
+    <header>
+        <app-button-blue>Crear Habitación</app-button-blue>
+    </header>
+    <section>
+
+        <mat-card *ngFor="let room of rooms">
+            <mat-card-content>{{room.name}}</mat-card-content>
+        </mat-card>
+
+
+    </section>
+</div>
