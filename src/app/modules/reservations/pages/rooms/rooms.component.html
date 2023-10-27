@@ -3,11 +3,7 @@
         <app-button-blue>Crear Habitación</app-button-blue>
     </header>
     <section>
-
-        <mat-card *ngFor="let room of rooms">
-            <mat-card-content>{{room.name}}</mat-card-content>
-        </mat-card>
-
-
+        <app-card-room *ngFor="let room of rooms" name="{{room.name}}" [color]="room.color"
+            [type]="room.type" [state]="room.state"></app-card-room>
     </section>
 </div>

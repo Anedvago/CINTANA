@@ -17,7 +17,7 @@ header {
 
 section {
     width: 98%;
-    height: 88%;
+    height: 90%;
     overflow: auto;
     display: flex;
     justify-content: space-between;
@@ -26,10 +26,11 @@ section {
 
 app-button-blue {
     width: 30%;
+    height: 70%;
 }
 
-mat-card {
+app-card-room {
     width: 32%;
-    height: 30%;
+    height: 33%;
     margin: 10px 0;
 }

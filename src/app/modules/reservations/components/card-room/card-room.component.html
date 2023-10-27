@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-content>
+        <header>
+            <span [ngStyle]="{ 'background-color': color }" class="material-symbols-outlined">
+                bed
+            </span>
+            <div class="content">{{type | titlecase}}</div>
+        </header>
+        <section> {{name | titlecase}} </section>
+        <footer>
+            <button mat-raised-button>
+                {{state | titlecase}}
+            </button>
+        </footer>
+    </mat-card-content>
+</mat-card>
