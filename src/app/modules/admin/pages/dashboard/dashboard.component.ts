@@ -29,8 +29,7 @@ export class DashboardComponent {
   constructor(
     private roomService: RoomService,
     private clientService: ClientService,
-    private articleService: ArticleService,
-    private cdr:ChangeDetectorRef
+    private articleService: ArticleService
   ) {
     this.setCardRooms();
     this.getClientsReserved();
@@ -38,35 +37,22 @@ export class DashboardComponent {
     this.getArticlesWithLowStock();
   }
 
-  /*public setCardRooms() {
-    this.roomService.getAllRooms().then((data) => {
-      this.totalRooms = data!.length;
-      this.roomService.getRoomsReserved().then((data) => {
-        this.reservedRooms = data!.length;
-        this.roomService.getRoomsOcuped().then((data) => {
-          this.ocupedRooms = data!.length;
-          this.freeRooms =
-            this.totalRooms - this.reservedRooms - this.ocupedRooms;
-        });
+  public setCardRooms() {
+    this.roomService.getRoomsSuscribe().subscribe((data: any) => {
+      this.totalRooms = data.length;
+      this.ocupedRooms = 0;
+      this.reservedRooms = 0;
+      this.freeRooms = 0;
+      data.forEach((element: any) => {
+        if (element.state == 'ocupada') {
+          this.ocupedRooms++;
+        } else if (element.state == 'reservada') {
+          this.reservedRooms++;
+        } else {
+          this.freeRooms++;
+        }
       });
     });
-  }*/
-
-  public setCardRooms() {
-    this.roomService.getAllRooms().then((data) => {
-      this.totalRooms = data!.length;
-    });
-    this.roomService.getRoomsOcupedSuscribe().subscribe((data:any)=>{
-      this.ocupedRooms = data.length;
-     
-      this.roomService.getRoomsReservedSuscribe().subscribe((data:any)=>{
-        this.reservedRooms = data.length;
-        this.freeRooms = this.totalRooms - this.ocupedRooms-this.reservedRooms
-        this.cdr.detectChanges();
-      })
-      
-    })
-    
   }
 
   columnsInd: string[] = ['nombre', 'estado', 'habitacion'];
@@ -87,7 +73,6 @@ export class DashboardComponent {
       });
 
       this.rowsInd = this.rowsInd.concat(arr);
-
     });
   }
   public getClientsOcuped() {
@@ -100,7 +85,6 @@ export class DashboardComponent {
         };
       });
       this.rowsInd = this.rowsInd.concat(arr);
-
     });
   }
 
@@ -115,5 +99,4 @@ export class DashboardComponent {
       });
     });
   }
-
 }

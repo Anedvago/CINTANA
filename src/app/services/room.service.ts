@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { RealtimeChannel, SupabaseClient, createClient } from '@supabase/supabase-js';
+import {
+  RealtimeChannel,
+  SupabaseClient,
+  createClient,
+} from '@supabase/supabase-js';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { DateService } from './date.service';
@@ -19,127 +23,57 @@ export class RoomService {
     );
   }
 
-  public async getAllRooms(): Promise<any[] | null> {
-    let { data: Rooms, error } = await this.supabaseClient
-      .from('Rooms')
-      .select('*').order("name");
-    return Rooms;
-  }
-
-  public async getAllRoomsWhitState() {
-    const Bookings = this.supabaseClient.channel('custom-all-channel')
+  public getRoomsSuscribe() {
+    const changes = new Subject();
+    this.supabaseClient
+      .channel('custom-all-channel')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'Bookings' },
-        (payload) => {
-          console.log('Change received!', payload)
-          return
+        async (payload) => {
+          this.getAllRooms().then((data) => {
+            changes.next(data);
+          });
         }
       )
+      .subscribe(async () => {
+        this.getAllRooms().then((data) => {
+          changes.next(data);
+        });
+      });
 
+    return changes.asObservable();
   }
-
-  public async getRoomsReserved(): Promise<any[] | null> {
-    const currentDate = new Date();
+  async getAllRooms() {
     const now = this.dateService.getDateTimeNow();
-    const tomorrow = `${currentDate.getFullYear()}-${(
-      currentDate.getMonth() + 1
-    )
-      .toString()
-      .padStart(2, '0')}-${(currentDate.getDate() + 1)
-        .toString()
-        .padStart(2, '0')} ${currentDate
-          .getHours()
-          .toString()
-          .padStart(2, '0')}:${currentDate
-            .getMinutes()
-            .toString()
-            .padStart(2, '0')}:${currentDate
-              .getSeconds()
-              .toString()
-              .padStart(2, '0')}`;
+    const tomorrow = this.dateService.getDateTimeTomorrow();
+    let { data: AllRooms } = await this.supabaseClient
+      .from('Rooms')
+      .select('*')
+      .order('name');
 
-    let { data: Rooms, error } = await this.supabaseClient
-      .from('Bookings')
-      .select('room')
-      .gt('start', now)
-      .lt('start', tomorrow);
-    /*  .or(`end.eq.${now},start.eq.${now}`); */
-
-    return Rooms;
-  }
-
-  public async getRoomsOcuped(): Promise<any[] | null> {
-    const currentDate = new Date();
-    const now = this.dateService.getDateTimeNow();
-
-    let { data: Rooms, error } = await this.supabaseClient
+    let { data: OcupedRooms } = await this.supabaseClient
       .from('Bookings')
       .select('room')
       .gt('end', now)
       .lt('start', now);
 
-    return Rooms;
-  }
+    let { data: ReservedRooms } = await this.supabaseClient
+      .from('Bookings')
+      .select('room')
+      .gt('start', now)
+      .lt('start', tomorrow);
 
-  public getRoomsOcupedSuscribe() {
-    const changes = new Subject();
-    this.supabaseClient.channel('custom-all-channel')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'Bookings' },
-        async (payload) => {
-          const now = this.dateService.getDateTimeNow();
-          let { data: Rooms, error } = await this.supabaseClient
-            .from('Bookings')
-            .select('room')
-            .gt('end', now)
-            .lt('start', now);
-          changes.next(Rooms)
-        }
-      )
-      .subscribe(async () => {
-        const now = this.dateService.getDateTimeNow();
+    AllRooms = AllRooms!.map((obj) => {
+      return { ...obj, state: 'libre' };
+    });
 
-        let { data: Rooms, error } = await this.supabaseClient
-          .from('Bookings')
-          .select('room')
-          .gt('end', now)
-          .lt('start', now);
-        changes.next(Rooms);
-      })
-
-    return changes.asObservable();
-  }
-
-  public getRoomsReservedSuscribe() {
-    const changes = new Subject();
-    this.supabaseClient.channel('custom-all-channel')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'Bookings' },
-        async (payload) => {
-          const now = this.dateService.getDateTimeNow();
-          const tomorrow = this.dateService.getDateTimeTomorrow()
-          let { data: Rooms, error } = await this.supabaseClient
-            .from('Bookings')
-            .select('room')
-            .gt('start', now)
-            .lt('start', tomorrow);
-          changes.next(Rooms)
-        }
-      )
-      .subscribe(async () => {
-        const now = this.dateService.getDateTimeNow();
-        const tomorrow = this.dateService.getDateTimeTomorrow()
-        let { data: Rooms, error } = await this.supabaseClient
-          .from('Bookings')
-          .select('room')
-          .gt('start', now)
-          .lt('start', tomorrow);
-        changes.next(Rooms);
-      })
-
-    return changes.asObservable();
+    ReservedRooms?.forEach((element: any) => {
+      AllRooms!.find((obj) => obj.id == element.room).state = 'reservada';
+    });
+    OcupedRooms?.forEach((element: any) => {
+      AllRooms!.find((obj) => obj.id == element.room).state = 'ocupada';
+    });
+    return AllRooms;
   }
 }
