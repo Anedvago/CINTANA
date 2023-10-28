@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { CardRoomComponent } from '../../components/card-room/card-room.component';
@@ -29,7 +29,8 @@ export class DashboardComponent {
   constructor(
     private roomService: RoomService,
     private clientService: ClientService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private cdr:ChangeDetectorRef
   ) {
     this.setCardRooms();
     this.getClientsReserved();
@@ -37,7 +38,7 @@ export class DashboardComponent {
     this.getArticlesWithLowStock();
   }
 
-  public setCardRooms() {
+  /*public setCardRooms() {
     this.roomService.getAllRooms().then((data) => {
       this.totalRooms = data!.length;
       this.roomService.getRoomsReserved().then((data) => {
@@ -49,6 +50,23 @@ export class DashboardComponent {
         });
       });
     });
+  }*/
+
+  public setCardRooms() {
+    this.roomService.getAllRooms().then((data) => {
+      this.totalRooms = data!.length;
+    });
+    this.roomService.getRoomsOcupedSuscribe().subscribe((data:any)=>{
+      this.ocupedRooms = data.length;
+     
+      this.roomService.getRoomsReservedSuscribe().subscribe((data:any)=>{
+        this.reservedRooms = data.length;
+        this.freeRooms = this.totalRooms - this.ocupedRooms-this.reservedRooms
+        this.cdr.detectChanges();
+      })
+      
+    })
+    
   }
 
   columnsInd: string[] = ['nombre', 'estado', 'habitacion'];
@@ -67,9 +85,9 @@ export class DashboardComponent {
           habitacion: item.Rooms.name,
         };
       });
-    
+
       this.rowsInd = this.rowsInd.concat(arr);
-     
+
     });
   }
   public getClientsOcuped() {
@@ -82,7 +100,7 @@ export class DashboardComponent {
         };
       });
       this.rowsInd = this.rowsInd.concat(arr);
-    
+
     });
   }
 
@@ -97,5 +115,5 @@ export class DashboardComponent {
       });
     });
   }
-  
+
 }

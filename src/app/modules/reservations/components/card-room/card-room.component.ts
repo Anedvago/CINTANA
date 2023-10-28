@@ -12,12 +12,5 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class CardRoomComponent {
   @Input()
-  name: string = "";
-  @Input()
-  color: string = "";
-  @Input()
-  type: string = "";
-  @Input()
-  state: string = "";
-
+  room!: any;
 }

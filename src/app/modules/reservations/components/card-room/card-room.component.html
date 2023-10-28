@@ -1,15 +1,15 @@
 <mat-card>
     <mat-card-content>
         <header>
-            <span [ngStyle]="{ 'background-color': color }" class="material-symbols-outlined">
+            <span [ngStyle]="{ 'background-color': room.color }" class="material-symbols-outlined">
                 bed
             </span>
-            <div class="content">{{type | titlecase}}</div>
+            <div class="content">{{room.type | titlecase}}</div>
         </header>
-        <section> {{name | titlecase}} </section>
+        <section> {{room.name | titlecase}} </section>
         <footer>
-            <button mat-raised-button>
-                {{state | titlecase}}
+            <button mat-raised-button [ngClass]="{'ocuped':room.state == 'ocupada','free':room.state == 'libre','reserved': room.state == 'reservada' }">
+                {{room.state | titlecase}}
             </button>
         </footer>
     </mat-card-content>

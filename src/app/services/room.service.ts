@@ -83,43 +83,63 @@ export class RoomService {
   }
 
   public getRoomsOcupedSuscribe() {
-    const sj = new Subject
-    /*const Bookings = this.supabaseClient.channel('custom-all-channel')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'Bookings' },
-        (payload) => {
-          console.log('Change received!', payload);
-          sj.next(payload)
-        }
-      ).subscribe()
-      
-      sj.next(Bookings)
-      return sj.asObservable();*/
-    const Bookings = this.supabaseClient.channel('custom-all-channel')
+    const changes = new Subject();
+    this.supabaseClient.channel('custom-all-channel')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'Bookings' },
         async (payload) => {
-          console.log('Change received!', payload);
           const now = this.dateService.getDateTimeNow();
-
           let { data: Rooms, error } = await this.supabaseClient
             .from('Bookings')
             .select('room')
             .gt('end', now)
             .lt('start', now);
-          sj.next(Rooms)
+          changes.next(Rooms)
         }
-      ).subscribe(async (data)=>{
+      )
+      .subscribe(async () => {
         const now = this.dateService.getDateTimeNow();
+
         let { data: Rooms, error } = await this.supabaseClient
+          .from('Bookings')
+          .select('room')
+          .gt('end', now)
+          .lt('start', now);
+        changes.next(Rooms);
+      })
+
+    return changes.asObservable();
+  }
+
+  public getRoomsReservedSuscribe() {
+    const changes = new Subject();
+    this.supabaseClient.channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Bookings' },
+        async (payload) => {
+          const now = this.dateService.getDateTimeNow();
+          const tomorrow = this.dateService.getDateTimeTomorrow()
+          let { data: Rooms, error } = await this.supabaseClient
             .from('Bookings')
             .select('room')
-            .gt('end', now)
-            .lt('start', now);
-          sj.next(Rooms)
+            .gt('start', now)
+            .lt('start', tomorrow);
+          changes.next(Rooms)
+        }
+      )
+      .subscribe(async () => {
+        const now = this.dateService.getDateTimeNow();
+        const tomorrow = this.dateService.getDateTimeTomorrow()
+        let { data: Rooms, error } = await this.supabaseClient
+          .from('Bookings')
+          .select('room')
+          .gt('start', now)
+          .lt('start', tomorrow);
+        changes.next(Rooms);
       })
-    return sj.asObservable();
+
+    return changes.asObservable();
   }
 }

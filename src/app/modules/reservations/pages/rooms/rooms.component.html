@@ -3,7 +3,6 @@
         <app-button-blue>Crear Habitación</app-button-blue>
     </header>
     <section>
-        <app-card-room *ngFor="let room of rooms" name="{{room.name}}" [color]="room.color"
-            [type]="room.type" [state]="room.state"></app-card-room>
+        <app-card-room *ngFor="let room of rooms" [room]="room"></app-card-room>
     </section>
 </div>

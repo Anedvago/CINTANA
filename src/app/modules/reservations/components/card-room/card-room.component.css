@@ -49,3 +49,13 @@ footer{
     align-items: center;
     height: 15%;
 }
+
+.ocuped{
+    background-color: #BB4141 !important;
+}
+.free{
+    background-color: #61BD5F !important;
+}
+.reserved{
+    background-color: #F19221 !important;
+}
