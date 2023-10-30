@@ -19,13 +19,14 @@ import { CardRoomComponent } from '../../components/card-room/card-room.componen
 })
 export class RoomsComponent {
   rooms: any[] = [];
-  constructor(private roomService: RoomService) {
+  constructor(private roomService: RoomService, private cdr:ChangeDetectorRef) {
     this.getAllRooms();
   }
 
   getAllRooms() {
     this.roomService.getRoomsSuscribe().subscribe((data: any) => {
       this.rooms = data;
+      this.cdr.detectChanges();
     });
   }
 }

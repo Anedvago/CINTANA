@@ -29,7 +29,8 @@ export class DashboardComponent {
   constructor(
     private roomService: RoomService,
     private clientService: ClientService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private cdr:ChangeDetectorRef
   ) {
     this.setCardRooms();
     this.getClientsReserved();
@@ -51,6 +52,7 @@ export class DashboardComponent {
         } else {
           this.freeRooms++;
         }
+        this.cdr.detectChanges();
       });
     });
   }

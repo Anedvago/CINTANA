@@ -36,7 +36,7 @@ export class RoomService {
           });
         }
       )
-      .subscribe(async () => {
+      .subscribe(() => {        
         this.getAllRooms().then((data) => {
           changes.next(data);
         });
