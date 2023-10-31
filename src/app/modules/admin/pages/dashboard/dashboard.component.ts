@@ -70,7 +70,6 @@ export class DashboardComponent {
   public getClientsInTransit(){
     this.clientService.getClientsInTransitSubscribe().subscribe((data:any)=>{
       this.rowsInd = data;
-      console.log(data);
       this.cdr.detectChanges();
     })
   }

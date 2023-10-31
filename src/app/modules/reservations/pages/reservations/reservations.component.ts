@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
@@ -51,7 +51,8 @@ export class ReservationsComponent {
 
   constructor(
     private bookingService: BookingService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdr:ChangeDetectorRef
   ) {
     this.getAllReservations();
   }
@@ -68,6 +69,7 @@ export class ReservationsComponent {
         };
       });
       this.calendarOptions.events = this.reservations;
+      this.cdr.detectChanges()
     });
   }
   click() {
