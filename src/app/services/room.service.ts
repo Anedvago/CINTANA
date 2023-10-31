@@ -69,4 +69,12 @@ export class RoomService {
     });
     return AllRooms;
   }
+
+  public async getRoomsNotSuscribe() {
+    let { data: AllRooms } = await this.supabaseClient
+      .from('Rooms')
+      .select('*')
+      .order('name');
+    return AllRooms;
+  }
 }

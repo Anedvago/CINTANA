@@ -6,11 +6,19 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
 import { BookingService } from 'src/app/services/booking.service';
+import { ModalNewReservationComponent } from '../../components/modal-new-reservation/modal-new-reservation.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-reservations',
   standalone: true,
-  imports: [CommonModule, FullCalendarModule, ButtonBlueComponent],
+  imports: [
+    CommonModule,
+    FullCalendarModule,
+    ButtonBlueComponent,
+    MatDialogModule,
+    ModalNewReservationComponent,
+  ],
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css'],
 })
@@ -34,7 +42,14 @@ export class ReservationsComponent {
     },
   };
 
-  constructor(private bookingService: BookingService) {
+  constructor(
+    private bookingService: BookingService,
+    public dialog: MatDialog
+  ) {
+    this.getAllReservations();
+  }
+
+  public getAllReservations() {
     this.bookingService.getAllReservations().subscribe((data: any) => {
       this.reservations = data!.map((elem: any) => {
         return {
@@ -48,8 +63,17 @@ export class ReservationsComponent {
       this.calendarOptions.events = this.reservations;
     });
   }
-
   click() {
     console.log('click');
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

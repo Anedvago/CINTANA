@@ -1,0 +1,71 @@
+<div class="container">
+  <h3>Formulario de nueva reserva</h3>
+  <form>
+    <div class="column-form">
+      <h3>Datos del cliente</h3>
+      <mat-form-field>
+        <mat-label>Tipo de identificacion</mat-label>
+        <mat-select>
+          <mat-option value="one">First option</mat-option>
+          <mat-option value="two">Second option</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Identificacion del cliente</mat-label>
+        <input matInput [(ngModel)]="dniCustomer" name="dniCustomer" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="nameCustomer" name="nameCustomer" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Telefono</mat-label>
+        <input matInput [(ngModel)]="telCustomer" name="telCustomer" />
+      </mat-form-field>
+    </div>
+    <div class="column-form">
+      <h3>Datos de la reserva</h3>
+      <mat-form-field>
+        <mat-label>Fecha De Entrada</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="dateStart"
+          name="dateStart"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Fecha De Salida</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [(ngModel)]="dateEnd"
+          name="dateEnd"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cantidad de personas</mat-label>
+        <input matInput [(ngModel)]="telCustomer" name="telCustomer" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Telefono</mat-label>
+        <input matInput [(ngModel)]="telCustomer" name="telCustomer" />
+      </mat-form-field>
+    </div>
+    <div class="column-form">
+      <h3>Datos de los servicios</h3>
+    </div>
+  </form>
+</div>
