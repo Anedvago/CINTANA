@@ -30,7 +30,7 @@ export class DashboardComponent {
     private roomService: RoomService,
     private clientService: ClientService,
     private articleService: ArticleService,
-    private cdr:ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {
     this.setCardRooms();
     this.getClientsReserved();
@@ -65,7 +65,7 @@ export class DashboardComponent {
   public rowsStock: any[] = [];
 
   public getClientsReserved() {
-    this.clientService.getClientsReserved().then((data) => {
+    this.clientService.getClientsReserved().subscribe((data: any) => {
       const arr = data!.map((item: any) => {
         return {
           nombre: item.Customers.name,
@@ -78,7 +78,7 @@ export class DashboardComponent {
     });
   }
   public getClientsOcuped() {
-    this.clientService.getClientsOcuped().then((data) => {
+    this.clientService.getClientsOcuped().subscribe((data: any) => {
       const arr = data!.map((item: any) => {
         return {
           nombre: item.Customers.name,
