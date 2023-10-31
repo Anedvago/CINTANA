@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -18,7 +18,7 @@ import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatCardModule,
   ],
   templateUrl: './modal-new-reservation.component.html',
   styleUrls: ['./modal-new-reservation.component.css'],

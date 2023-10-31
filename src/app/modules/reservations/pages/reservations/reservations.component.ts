@@ -8,6 +8,11 @@ import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.comp
 import { BookingService } from 'src/app/services/booking.service';
 import { ModalNewReservationComponent } from '../../components/modal-new-reservation/modal-new-reservation.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDatepicker,
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-reservations',
@@ -18,6 +23,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     ButtonBlueComponent,
     MatDialogModule,
     ModalNewReservationComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.css'],
