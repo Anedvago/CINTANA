@@ -7,6 +7,7 @@ import { VerticalBarsComponent } from '../../components/vertical-bars/vertical-b
 import { TableComponent } from 'src/app/shared/table/table.component';
 import { ClientService } from 'src/app/services/client.service';
 import { ArticleService } from 'src/app/services/article.service';
+import { BookingService } from 'src/app/services/booking.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -30,12 +31,14 @@ export class DashboardComponent {
     private roomService: RoomService,
     private clientService: ClientService,
     private articleService: ArticleService,
+    private bookingService: BookingService,
     private cdr: ChangeDetectorRef
   ) {
     this.setCardRooms();
-    this.getClientsReserved();
-    this.getClientsOcuped();
+    //this.getClientsReserved();
+    //this.getClientsOcuped();
     this.getArticlesWithLowStock();
+    this.getClientsInTransit()
   }
 
   public setCardRooms() {
@@ -52,8 +55,8 @@ export class DashboardComponent {
         } else {
           this.freeRooms++;
         }
-        this.cdr.detectChanges();
       });
+      this.cdr.detectChanges();
     });
   }
 
@@ -64,7 +67,15 @@ export class DashboardComponent {
   public columnsStock = ['Articulo', 'Estado', 'Stock'];
   public rowsStock: any[] = [];
 
-  public getClientsReserved() {
+  public getClientsInTransit(){
+    this.clientService.getClientsInTransitSubscribe().subscribe((data:any)=>{
+      this.rowsInd = data;
+      console.log(data);
+      this.cdr.detectChanges();
+    })
+  }
+
+  /*public getClientsReserved() {
     this.clientService.getClientsReserved().subscribe((data: any) => {
       const arr = data!.map((item: any) => {
         return {
@@ -75,6 +86,7 @@ export class DashboardComponent {
       });
 
       this.rowsInd = this.rowsInd.concat(arr);
+      this.cdr.detectChanges();
     });
   }
   public getClientsOcuped() {
@@ -87,8 +99,9 @@ export class DashboardComponent {
         };
       });
       this.rowsInd = this.rowsInd.concat(arr);
+      this.cdr.detectChanges();
     });
-  }
+  }*/
 
   public getArticlesWithLowStock() {
     this.articleService.getArticlesWithLowStock().then((data) => {

@@ -46,8 +46,8 @@ export class BookingService {
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'Bookings' },
-        async (payload) => {
-          changes.next('CAMBIO DETECTADO');
+        (payload) => {
+          changes.next(payload);          
         }
       )
       .subscribe(() => {

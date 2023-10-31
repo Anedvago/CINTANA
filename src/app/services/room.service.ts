@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  RealtimeChannel,
   SupabaseClient,
   createClient,
 } from '@supabase/supabase-js';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { DateService } from './date.service';
 import { BookingService } from './booking.service';
@@ -29,6 +28,7 @@ export class RoomService {
 
   public getRoomsSuscribe() {
     const changes = new Subject();
+
     this.bookingService.detectChangesInBookings().subscribe(() => {
       this.getAllRooms().then((data) => {
         changes.next(data);
@@ -37,6 +37,8 @@ export class RoomService {
 
     return changes.asObservable();
   }
+
+
   async getAllRooms() {
     const now = this.dateService.getDateTimeNow();
     const tomorrow = this.dateService.getDateTimeTomorrow();
