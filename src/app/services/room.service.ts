@@ -7,6 +7,7 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { DateService } from './date.service';
+import { BookingService } from './booking.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,10 @@ export class RoomService {
   private supabaseEnvironments: { apiKey: string; url: string } =
     environment.supabase;
 
-  constructor(private dateService: DateService) {
+  constructor(
+    private dateService: DateService,
+    private bookingService: BookingService
+  ) {
     this.supabaseClient = createClient(
       this.supabaseEnvironments.url,
       this.supabaseEnvironments.apiKey
@@ -25,22 +29,11 @@ export class RoomService {
 
   public getRoomsSuscribe() {
     const changes = new Subject();
-    this.supabaseClient
-      .channel('custom-all-channel')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'Bookings' },
-        async (payload) => {
-          this.getAllRooms().then((data) => {
-            changes.next(data);
-          });
-        }
-      )
-      .subscribe(() => {        
-        this.getAllRooms().then((data) => {
-          changes.next(data);
-        });
+    this.bookingService.detectChangesInBookings().subscribe(() => {
+      this.getAllRooms().then((data) => {
+        changes.next(data);
       });
+    });
 
     return changes.asObservable();
   }

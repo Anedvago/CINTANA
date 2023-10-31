@@ -35,8 +35,10 @@ export class ReservationsComponent {
   };
 
   constructor(private bookingService: BookingService) {
-    this.bookingService.getAllReservations().then((data) => {
-      this.reservations = data!.map((elem) => {
+    this.bookingService.getAllReservations().subscribe((data: any) => {
+      console.log(data);
+
+      this.reservations = data!.map((elem: any) => {
         return {
           title: `${elem.Customers.name} - ${elem.Rooms.name}`,
           start: elem.start,
