@@ -60,6 +60,18 @@ export class ModalNewReservationComponent {
     private bookingService: BookingService
   ) {
     this.getAllRooms();
+    console.log(data.reservation);
+    if (data.reservation != undefined) {
+      this.getCustomerById(data.reservation.customer);
+      this.dateStart = data.reservation.start;
+      this.dateEnd = data.reservation.end;
+      this.numberOfPeople = data.reservation.numberOfPeople;
+      this.room = data.reservation.room;
+      this.metodPay = data.reservation.wayToPay;
+      this.total = data.reservation.total;
+      this.payed = data.reservation.paid;
+    }
+
   }
 
   onNoClick(): void {
@@ -85,6 +97,17 @@ export class ModalNewReservationComponent {
         }
       });
   }
+
+  public getCustomerById(id: number) {
+    this.customerService
+      .getClientsById(id)
+      .then((data) => {
+        this.customer = data![0];
+        this.dniCustomer = this.customer.identification,
+        this.typeIdentification = this.customer.typeIdentification;
+      });
+  }
+
   public createNewCustomer() {
     this.customerService
       .createNewCustomer(

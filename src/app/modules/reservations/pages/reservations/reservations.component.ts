@@ -61,19 +61,29 @@ export class ReservationsComponent {
     this.bookingService.getAllReservations().subscribe((data: any) => {
       this.reservations = data!.map((elem: any) => {
         return {
+          id:elem.id,
           title: `${elem.Customers.name} - ${elem.Rooms.name}`,
           start: elem.start,
           end: elem.end,
           color: elem.Rooms.color,
           textColor: elem.Rooms.textColor,
+          customer:elem.customer,
+          numberOfPeople:elem.numberOfPeople,
+          room:elem.room,
+          wayToPay:elem.wayToPay,
+          total:elem.total,
+          paid:elem.paid
         };
       });
       this.calendarOptions.events = this.reservations;
       this.cdr.detectChanges()
     });
   }
-  click() {
-    console.log('click');
+  click(event:any) {
+    console.log('click', event.event.id);
+    const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+      data: {reservation:this.reservations.filter(elem => elem.id == event.event.id)[0]},
+    });
   }
 
   openDialog(): void {

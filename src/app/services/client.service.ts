@@ -93,6 +93,14 @@ export class ClientService {
     return Customers;
   }
 
+  public async getClientsById( id: number) {
+    let { data: Customers } = await this.supabaseClient
+      .from('Customers')
+      .select('*')
+      .eq('id', id)
+    return Customers;
+  }
+
   public async createNewCustomer(
     typeDni: string,
     dni: string,
