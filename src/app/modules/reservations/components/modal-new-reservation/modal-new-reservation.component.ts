@@ -60,18 +60,21 @@ export class ModalNewReservationComponent {
     private bookingService: BookingService
   ) {
     this.getAllRooms();
-    console.log(data.reservation);
     if (data.reservation != undefined) {
-      this.getCustomerById(data.reservation.customer);
-      this.dateStart = data.reservation.start;
-      this.dateEnd = data.reservation.end;
-      this.numberOfPeople = data.reservation.numberOfPeople;
-      this.room = data.reservation.room;
-      this.metodPay = data.reservation.wayToPay;
-      this.total = data.reservation.total;
-      this.payed = data.reservation.paid;
+      this.setReservationInStage()
     }
 
+  }
+
+  setReservationInStage() {
+    this.getCustomerById(this.data.reservation.customer);
+    this.dateStart = this.data.reservation.start;
+    this.dateEnd = this.data.reservation.end;
+    this.numberOfPeople = this.data.reservation.numberOfPeople;
+    this.room = this.data.reservation.room;
+    this.metodPay = this.data.reservation.wayToPay;
+    this.total = this.data.reservation.total;
+    this.payed = this.data.reservation.paid;
   }
 
   onNoClick(): void {
@@ -104,7 +107,7 @@ export class ModalNewReservationComponent {
       .then((data) => {
         this.customer = data![0];
         this.dniCustomer = this.customer.identification,
-        this.typeIdentification = this.customer.typeIdentification;
+          this.typeIdentification = this.customer.typeIdentification;
       });
   }
 
@@ -128,25 +131,50 @@ export class ModalNewReservationComponent {
   }
 
   public createReservation() {
-    this.bookingService
-      .createReservation(
-        this.dateService.convertDateInputToStringWithTime(
-          this.dateStart,
-          '12:00'
-        ),
-        this.dateService.convertDateInputToStringWithTime(
-          this.dateEnd,
-          '11:00'
-        ),
-        this.room!,
-        this.customer.id,
-        this.total,
-        this.payed,
-        this.metodPay!,
-        this.numberOfPeople
-      )
-      .then(() => {
-        this.dialogRef.close();
-      });
+    if (this.data.reservation != undefined) {
+      this.bookingService
+        .updateReservation(
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateStart,
+            '12:00'
+          ),
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateEnd,
+            '11:00'
+          ),
+          this.room!,
+          this.customer.id,
+          this.total,
+          this.payed,
+          this.metodPay!,
+          this.numberOfPeople,
+          this.data.reservation.id
+        )
+        .then(() => {
+          this.dialogRef.close();
+        });
+    } else {
+      this.bookingService
+        .createReservation(
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateStart,
+            '12:00'
+          ),
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateEnd,
+            '11:00'
+          ),
+          this.room!,
+          this.customer.id,
+          this.total,
+          this.payed,
+          this.metodPay!,
+          this.numberOfPeople
+        )
+        .then(() => {
+          this.dialogRef.close();
+        });
+    }
+
   }
 }

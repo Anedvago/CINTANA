@@ -84,4 +84,32 @@ export class BookingService {
       .select();
     return data;
   }
+
+  public async updateReservation(
+    start: string,
+    end: string,
+    room: number,
+    customer: number,
+    total: number,
+    payed: number,
+    metodPay: string,
+    numberOfPeople: number,
+    id: number
+  ) {
+    const { data, error } = await this.supabaseClient
+      .from('Bookings')
+      .update([{
+        start: start,
+        end: end,
+        room: room,
+        customer: customer,
+        total: total,
+        paid: payed,
+        wayToPay: metodPay,
+        numberOfPeople: numberOfPeople,
+      }])
+      .eq('id', id)
+      .select();
+    return data;
+  }
 }
