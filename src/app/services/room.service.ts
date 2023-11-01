@@ -56,8 +56,8 @@ export class RoomService {
     let { data: ReservedRooms } = await this.supabaseClient
       .from('Bookings')
       .select('room')
-      .gt('start', now)
-      .lt('start', tomorrow);
+      .gt('start', this.dateService.getDateTimeNow())
+      .lt('start', this.dateService.getDateTimeTomorrowInit());
 
     AllRooms = AllRooms!.map((obj) => {
       return { ...obj, state: 'libre' };

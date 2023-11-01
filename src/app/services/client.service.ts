@@ -54,7 +54,7 @@ export class ClientService {
       .from('Bookings')
       .select('Customers(*),Rooms(*)')
       .gt('start', this.dateService.getDateTimeNow())
-      .lt('start', this.dateService.getDateTimeTomorrow());
+      .lt('start', this.dateService.getDateTimeTomorrowInit());
     let { data: ClientsOcuped } = await this.supabaseClient
       .from('Bookings')
       .select('Customers(*),Rooms(*)')
