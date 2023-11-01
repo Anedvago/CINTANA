@@ -1,6 +1,6 @@
 .container {
   width: 80vw;
-  height: 80vh;
+  height: 94vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,4 +34,29 @@ mat-card {
 
 mat-form-field {
   width: 80%;
+}
+
+footer {
+  height: 12%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer app-button-blue {
+  height: 70% !important;
+  width: 30% !important;
+}
+
+.container-button {
+  display: flex;
+  height: 12%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.container-button app-button-blue {
+  height: 70% !important;
+  width: 80% !important;
 }
