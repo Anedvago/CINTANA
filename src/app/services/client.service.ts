@@ -110,5 +110,6 @@ export class ClientService {
         },
       ])
       .select();
+    return data;
   }
 }

@@ -47,7 +47,7 @@ export class BookingService {
         'postgres_changes',
         { event: '*', schema: 'public', table: 'Bookings' },
         (payload) => {
-          changes.next(payload);          
+          changes.next(payload);
         }
       )
       .subscribe(() => {
@@ -55,5 +55,33 @@ export class BookingService {
       });
 
     return changes.asObservable();
+  }
+
+  public async createReservation(
+    start: string,
+    end: string,
+    room: number,
+    customer: number,
+    total: number,
+    payed: number,
+    metodPay: string,
+    numberOfPeople: number
+  ) {
+    const { data, error } = await this.supabaseClient
+      .from('Bookings')
+      .insert([
+        {
+          start: start,
+          end: end,
+          room: room,
+          customer: customer,
+          total: total,
+          paid: payed,
+          wayToPay: metodPay,
+          numberOfPeople: numberOfPeople,
+        },
+      ])
+      .select();
+    return data;
   }
 }

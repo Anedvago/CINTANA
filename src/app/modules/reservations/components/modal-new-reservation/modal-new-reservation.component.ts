@@ -10,6 +10,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
 import { ClientService } from 'src/app/services/client.service';
+import { DateService } from 'src/app/services/date.service';
+import { BookingService } from 'src/app/services/booking.service';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -38,10 +40,7 @@ export class ModalNewReservationComponent {
     { name: 'CÉDULA DE EXTRANJERÍA', value: 'CE' },
     { name: 'PASAPORTE', value: 'PA' },
   ];
-  public typesPay = [
-    { value: 'EF', name: 'EFECTIVO' },
-    { value: 'TR', name: 'TRANSFERENCIA' },
-  ];
+  public typesPay = ['EFECTIVO', 'TRANSFERENCIA'];
   customer?: any;
   numberOfPeople = 0;
   room?: number;
@@ -56,7 +55,9 @@ export class ModalNewReservationComponent {
     public dialogRef: MatDialogRef<ModalNewReservationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private roomService: RoomService,
-    private customerService: ClientService
+    private customerService: ClientService,
+    private dateService: DateService,
+    private bookingService: BookingService
   ) {
     this.getAllRooms();
   }
@@ -98,8 +99,31 @@ export class ModalNewReservationComponent {
       });
   }
   public calcTotal() {
-    /* this.total =  */
+    const miliSeconds = Math.abs(Number(this.dateEnd) - Number(this.dateStart));
+    const days = miliSeconds / 86400000;
+    this.total = days * 80000 * this.numberOfPeople;
+  }
 
-    console.log(this.dateStart);
+  public createReservation() {
+    this.bookingService
+      .createReservation(
+        this.dateService.convertDateInputToStringWithTime(
+          this.dateStart,
+          '12:00'
+        ),
+        this.dateService.convertDateInputToStringWithTime(
+          this.dateEnd,
+          '11:00'
+        ),
+        this.room!,
+        this.customer.id,
+        this.total,
+        this.payed,
+        this.metodPay!,
+        this.numberOfPeople
+      )
+      .then(() => {
+        this.dialogRef.close();
+      });
   }
 }
