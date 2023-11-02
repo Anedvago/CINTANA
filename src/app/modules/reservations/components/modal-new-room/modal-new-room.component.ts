@@ -26,29 +26,31 @@ export class ModalNewRoomComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cdr: ChangeDetectorRef
   ) {
-   
-  }
 
-  public setRoom(){
-   this.room.name = this.data.room.name;
-   this.room.type = this.data.room.type;
-   this.room.color = this.data.room.color;
+    this.room = data.room
 
   }
 
-  public types: string[] = ["Habitacion", "Cabaña"]
+  public types: string[] = ["Habitación", "Cabaña"]
 
-  public room = { name: "", type: "", color: "" };
+  public room: any;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   public createNewRoom() {
-    console.log(this.room);
+    if (this.room.id != undefined) {
+      console.log(this.room,"ACTUALIZA");
+      
+      this.roomService.updateRoom(this.room).then(() => {
+        this.dialogRef.close();
+      })
+    } else {
+      this.roomService.createNewRoom(this.room).then(() => { 
+        this.dialogRef.close();
+      })
+    }
 
-    /*this.roomService.createNewRoom(this.room).then(() => {
-      this.dialogRef.close();
-    })*/
   }
 }

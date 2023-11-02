@@ -22,6 +22,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 })
 export class RoomsComponent {
   rooms: any[] = [];
+  room = { name: "", type: "", color: "#000000" };
   constructor(private roomService: RoomService, private cdr: ChangeDetectorRef, public dialog: MatDialog) {
     this.getAllRooms();
   }
@@ -34,16 +35,20 @@ export class RoomsComponent {
   }
 
   openDialog(): void {
+   
     const dialogRef = this.dialog.open(ModalNewRoomComponent, {
-      data: {},
+      data: { room: this.room },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
+      this.room = { name: "", type: "", color: "#000000" };
+      this.getAllRooms()
     });
   }
 
-  selectRoom() {
-    this.openDialog()
+  selectRoom(room: any) {
+    this.room = room;
+    console.log(room);
+
   }
 }

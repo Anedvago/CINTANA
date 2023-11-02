@@ -107,4 +107,13 @@ export class RoomService {
     .select()
     return data;
   }
+  public async updateRoom(room:any) {
+    const { data, error } = await this.supabaseClient
+    .from('Rooms')
+    .update(
+      [{name:room.name,type:room.type,color:room.color}]
+    ).eq('id',room.id)
+    .select()
+    return data;
+  }
 }
