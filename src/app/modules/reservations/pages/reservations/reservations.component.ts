@@ -9,7 +9,6 @@ import { BookingService } from 'src/app/services/booking.service';
 import { ModalNewReservationComponent } from '../../components/modal-new-reservation/modal-new-reservation.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {
-  MatDatepicker,
   MatDatepickerModule,
 } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';

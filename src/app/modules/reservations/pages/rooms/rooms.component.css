@@ -17,8 +17,9 @@ header {
 
 section {
     width: 98%;
-    height: 90%;
-    overflow: auto;
+    height: 88%;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -33,4 +34,8 @@ app-card-room {
     width: 32%;
     height: 33%;
     margin: 10px 0;
+}
+app-card-room:hover{
+    cursor: pointer;
+    transform: scale(1.01);
 }
