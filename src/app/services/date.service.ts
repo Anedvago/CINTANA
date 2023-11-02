@@ -38,7 +38,6 @@ export class DateService {
     const seconds = tomorrowDate.getSeconds().toString().padStart(2, '0');
 
     const tomorrow = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    console.log(tomorrow);
     
     return tomorrow;
   }
@@ -61,12 +60,8 @@ export class DateService {
     const year = tomorrowDate.getFullYear();
     const month = (tomorrowDate.getMonth() + 1).toString().padStart(2, '0');
     const day = tomorrowDate.getDate().toString().padStart(2, '0');
-    const hours = tomorrowDate.getHours().toString().padStart(2, '0');
-    const minutes = tomorrowDate.getMinutes().toString().padStart(2, '0');
-    const seconds = tomorrowDate.getSeconds().toString().padStart(2, '0');
 
     const tomorrow = `${year}-${month}-${day} ${'01'}:${'00'}:${'00'}`;
-    console.log(tomorrow);
     
     return tomorrow;
   }

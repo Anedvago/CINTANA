@@ -3,6 +3,6 @@
         <app-button-blue (pressClick)="openDialog()" >Crear Habitación</app-button-blue>
     </header>
     <section>
-        <app-card-room (click)="openDialog()" *ngFor="let room of rooms" [room]="room"></app-card-room>
+        <app-card-room (click)="selectRoom()" *ngFor="let room of rooms" [room]="room"></app-card-room>
     </section>
 </div>

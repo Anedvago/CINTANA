@@ -34,10 +34,28 @@ export class RoomService {
         changes.next(data);
       });
     });
+    
 
     return changes.asObservable();
   }
 
+  /*public detectChangesInRooms() {
+    const changes = new Subject();
+    this.supabaseClient
+      .channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Rooms' },
+        (payload) => {
+          changes.next(payload);
+        }
+      )
+      .subscribe(() => {
+        changes.next('SUSCRIPCION INICIAL');
+      });
+
+    return changes.asObservable();
+  }*/
 
   async getAllRooms() {
     const now = this.dateService.getDateTimeNow();
@@ -78,5 +96,15 @@ export class RoomService {
       .select('*')
       .order('name');
     return AllRooms;
+  }
+
+  public async createNewRoom(room:any) {
+    const { data, error } = await this.supabaseClient
+    .from('Rooms')
+    .insert([
+      room
+    ])
+    .select()
+    return data;
   }
 }

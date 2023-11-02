@@ -15,14 +15,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     ButtonBlueComponent,
     MatCardModule,
     CardRoomComponent,
-    MatDialogModule
+    MatDialogModule, ModalNewRoomComponent
   ],
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent {
   rooms: any[] = [];
-  constructor(private roomService: RoomService, private cdr:ChangeDetectorRef,public dialog: MatDialog) {
+  constructor(private roomService: RoomService, private cdr: ChangeDetectorRef, public dialog: MatDialog) {
     this.getAllRooms();
   }
 
@@ -39,7 +39,11 @@ export class RoomsComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+
     });
+  }
+
+  selectRoom() {
+    this.openDialog()
   }
 }

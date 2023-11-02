@@ -65,7 +65,6 @@ export class ReservationsComponent {
           start: elem.start,
           end: elem.end,
           color: elem.Rooms.color,
-          textColor: elem.Rooms.textColor,
           customer:elem.customer,
           numberOfPeople:elem.numberOfPeople,
           room:elem.room,

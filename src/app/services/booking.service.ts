@@ -22,7 +22,7 @@ export class BookingService {
     this.detectChangesInBookings().subscribe(() => {
       this.supabaseClient
         .from('Bookings')
-        .select('*,Customers (name), Rooms (name,color,textColor)')
+        .select('*,Customers (name), Rooms (name,color)')
         .then((data) => {
           changes.next(data.data);
         });
@@ -33,7 +33,7 @@ export class BookingService {
   public async obtainReservations() {
     let { data: Reservations, error } = await this.supabaseClient
       .from('Bookings')
-      .select('*,Customers (name), Rooms (name,color,textColor)');
+      .select('*,Customers (name), Rooms (name,color)');
     console.log(Reservations);
 
     return Reservations;
