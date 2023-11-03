@@ -98,18 +98,27 @@ export class BookingService {
   ) {
     const { data, error } = await this.supabaseClient
       .from('Bookings')
-      .update([{
-        start: start,
-        end: end,
-        room: room,
-        customer: customer,
-        total: total,
-        paid: payed,
-        wayToPay: metodPay,
-        numberOfPeople: numberOfPeople,
-      }])
+      .update([
+        {
+          start: start,
+          end: end,
+          room: room,
+          customer: customer,
+          total: total,
+          paid: payed,
+          wayToPay: metodPay,
+          numberOfPeople: numberOfPeople,
+        },
+      ])
       .eq('id', id)
       .select();
     return data;
+  }
+  public async deleteReservation(id: number) {
+    const { data: Reservation, error } = await this.supabaseClient
+      .from('Bookings')
+      .delete()
+      .eq('id', id);
+    return Reservation;
   }
 }

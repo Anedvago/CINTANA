@@ -135,6 +135,11 @@
     </div>
   </form>
   <footer>
+    <app-button-blue
+      *ngIf="data.reservation != undefined"
+      (pressClick)="deleteReservation()"
+      >Eliminar Reserva</app-button-blue
+    >
     <app-button-blue (pressClick)="createReservation()"
       >Guardar Reserva</app-button-blue
     >

@@ -61,9 +61,8 @@ export class ModalNewReservationComponent {
   ) {
     this.getAllRooms();
     if (data.reservation != undefined) {
-      this.setReservationInStage()
+      this.setReservationInStage();
     }
-
   }
 
   setReservationInStage() {
@@ -102,13 +101,11 @@ export class ModalNewReservationComponent {
   }
 
   public getCustomerById(id: number) {
-    this.customerService
-      .getClientsById(id)
-      .then((data) => {
-        this.customer = data![0];
-        this.dniCustomer = this.customer.identification,
-          this.typeIdentification = this.customer.typeIdentification;
-      });
+    this.customerService.getClientsById(id).then((data) => {
+      this.customer = data![0];
+      (this.dniCustomer = this.customer.identification),
+        (this.typeIdentification = this.customer.typeIdentification);
+    });
   }
 
   public createNewCustomer() {
@@ -175,6 +172,11 @@ export class ModalNewReservationComponent {
           this.dialogRef.close();
         });
     }
+  }
 
+  public deleteReservation() {
+    this.bookingService.deleteReservation(this.data.reservation.id).then(() => {
+      this.dialogRef.close();
+    });
   }
 }

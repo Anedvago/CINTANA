@@ -21,11 +21,11 @@
     </mat-form-field>
   </form>
   <footer>
-    <app-button-blue (pressClick)="createNewRoom()"
-      >Guardar Habitacion</app-button-blue
-    >
     <app-button-blue *ngIf="room.id != undefined" (pressClick)="deleteRoom()"
       >Eliminar Habitacion</app-button-blue
+    >
+    <app-button-blue (pressClick)="createNewRoom()"
+      >Guardar Habitacion</app-button-blue
     >
   </footer>
 </div>
