@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  SupabaseClient,
-  createClient,
-} from '@supabase/supabase-js';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { DateService } from './date.service';
@@ -34,7 +31,6 @@ export class RoomService {
         changes.next(data);
       });
     });
-    
 
     return changes.asObservable();
   }
@@ -98,22 +94,28 @@ export class RoomService {
     return AllRooms;
   }
 
-  public async createNewRoom(room:any) {
+  public async createNewRoom(room: any) {
     const { data, error } = await this.supabaseClient
-    .from('Rooms')
-    .insert([
-      room
-    ])
-    .select()
+      .from('Rooms')
+      .insert([room])
+      .select();
     return data;
   }
-  public async updateRoom(room:any) {
+  public async updateRoom(room: any) {
     const { data, error } = await this.supabaseClient
-    .from('Rooms')
-    .update(
-      [{name:room.name,type:room.type,color:room.color}]
-    ).eq('id',room.id)
-    .select()
+      .from('Rooms')
+      .update([{ name: room.name, type: room.type, color: room.color }])
+      .eq('id', room.id)
+      .select();
+    return data;
+  }
+
+  public async deleteRoom(id: number) {
+    const { data, error } = await this.supabaseClient
+      .from('Rooms')
+      .delete()
+      .eq('id', id)
+      .select();
     return data;
   }
 }

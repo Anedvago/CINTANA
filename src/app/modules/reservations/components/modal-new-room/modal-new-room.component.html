@@ -1,29 +1,31 @@
 <div class="container">
-    <header>
-        <h3>Formulario de gestión de habitaciones</h3>
-    </header>
-    <form >
-        <mat-form-field>
-            <mat-label>Nombre de la habitacion</mat-label>
-            <input matInput [(ngModel)]="room.name" name="room.name" />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Tipo de identificacion</mat-label>
-            <mat-select [(ngModel)]="room.type" name="room.type">
-              <mat-option
-                value="one"
-                *ngFor="let type of types"
-                [value]="type"
-                >{{ type | titlecase }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        <mat-form-field >
-            <mat-label>Color identificativo</mat-label>
-            <input type="color" matInput [(ngModel)]="room.color" name="room.color" />
-        </mat-form-field>
-    </form>
-    <footer>
-        <app-button-blue (pressClick)="createNewRoom()" >Guardar Habitacion</app-button-blue>
-    </footer>
+  <header>
+    <h3>Formulario de gestión de habitaciones</h3>
+  </header>
+  <form>
+    <mat-form-field>
+      <mat-label>Nombre de la habitacion</mat-label>
+      <input matInput [(ngModel)]="room.name" name="room.name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tipo de identificacion</mat-label>
+      <mat-select [(ngModel)]="room.type" name="room.type">
+        <mat-option value="one" *ngFor="let type of types" [value]="type">{{
+          type | titlecase
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Color identificativo</mat-label>
+      <input type="color" matInput [(ngModel)]="room.color" name="room.color" />
+    </mat-form-field>
+  </form>
+  <footer>
+    <app-button-blue (pressClick)="createNewRoom()"
+      >Guardar Habitacion</app-button-blue
+    >
+    <app-button-blue *ngIf="room.id != undefined" (pressClick)="deleteRoom()"
+      >Eliminar Habitacion</app-button-blue
+    >
+  </footer>
 </div>

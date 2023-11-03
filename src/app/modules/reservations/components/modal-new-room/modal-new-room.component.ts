@@ -10,14 +10,16 @@ import { RoomService } from 'src/app/services/room.service';
 @Component({
   selector: 'app-modal-new-room',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     ButtonBlueComponent,
-    MatSelectModule],
+    MatSelectModule,
+  ],
   templateUrl: './modal-new-room.component.html',
-  styleUrls: ['./modal-new-room.component.css']
+  styleUrls: ['./modal-new-room.component.css'],
 })
 export class ModalNewRoomComponent {
   constructor(
@@ -26,12 +28,10 @@ export class ModalNewRoomComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private cdr: ChangeDetectorRef
   ) {
-
-    this.room = data.room
-
+    this.room = data.room;
   }
 
-  public types: string[] = ["Habitación", "Cabaña"]
+  public types: string[] = ['Habitación', 'Cabaña'];
 
   public room: any;
 
@@ -41,16 +41,21 @@ export class ModalNewRoomComponent {
 
   public createNewRoom() {
     if (this.room.id != undefined) {
-      console.log(this.room,"ACTUALIZA");
-      
+      console.log(this.room, 'ACTUALIZA');
+
       this.roomService.updateRoom(this.room).then(() => {
         this.dialogRef.close();
-      })
+      });
     } else {
-      this.roomService.createNewRoom(this.room).then(() => { 
+      this.roomService.createNewRoom(this.room).then(() => {
         this.dialogRef.close();
-      })
+      });
     }
+  }
 
+  deleteRoom() {
+    this.roomService.deleteRoom(this.room.id).then(() => {
+      this.dialogRef.close();
+    });
   }
 }
