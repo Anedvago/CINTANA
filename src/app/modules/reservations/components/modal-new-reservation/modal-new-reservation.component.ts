@@ -122,8 +122,13 @@ export class ModalNewReservationComponent {
       });
   }
   public calcTotal() {
-    const miliSeconds = Math.abs(Number(this.dateEnd) - Number(this.dateStart));
-    const days = miliSeconds / 86400000;
+    this.total = 0;
+    const dateStart = new Date(this.dateStart);
+    const dateEnd = new Date(this.dateEnd);
+    const miliSeconds = Math.abs(Number(dateEnd) - Number(dateStart));
+    const days = miliSeconds / 86400000;    
+    console.log(days);
+    
     this.total = days * 80000 * this.numberOfPeople;
   }
 
