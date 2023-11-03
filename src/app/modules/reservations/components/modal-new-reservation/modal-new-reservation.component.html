@@ -136,12 +136,22 @@
   </form>
   <footer>
     <app-button-blue
-      *ngIf="data.reservation != undefined"
+      *ngIf="
+        data.reservation != undefined &&
+        (data.origin == undefined || data.origin != 'CHECK')
+      "
       (pressClick)="deleteReservation()"
       >Eliminar Reserva</app-button-blue
     >
-    <app-button-blue (pressClick)="createReservation()"
+    <app-button-blue
+      *ngIf="data.origin == undefined || data.origin != 'CHECK'"
+      (pressClick)="createReservation()"
       >Guardar Reserva</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="data.origin != undefined && data.origin == 'CHECK'"
+      (pressClick)="createReservation()"
+      >Realizar Check</app-button-blue
     >
   </footer>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { DateService } from './date.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class BookingService {
   private supabaseClient!: SupabaseClient;
   private supabaseEnvironments: { apiKey: string; url: string } =
     environment.supabase;
-  constructor() {
+  constructor(private dateService: DateService) {
     this.supabaseClient = createClient(
       this.supabaseEnvironments.url,
       this.supabaseEnvironments.apiKey
@@ -119,6 +120,19 @@ export class BookingService {
       .from('Bookings')
       .delete()
       .eq('id', id);
+    return Reservation;
+  }
+
+  public async getReservationToCheck(idCustomer: number) {
+    const today = this.dateService.getDateTimeNowInit();
+    const tomorrow = this.dateService.getDateTimeTomorrowInit();
+    const { data: Reservation, error } = await this.supabaseClient
+      .from('Bookings')
+      .select()
+      .gte('start', today)
+      .lte('start', tomorrow)
+      .eq('customer', idCustomer);
+
     return Reservation;
   }
 }
