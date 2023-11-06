@@ -8,7 +8,7 @@
       <input matInput [(ngModel)]="room.name" name="room.name" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Tipo de identificacion</mat-label>
+      <mat-label>Tipo de habitacion</mat-label>
       <mat-select [(ngModel)]="room.type" name="room.type">
         <mat-option value="one" *ngFor="let type of types" [value]="type">{{
           type | titlecase

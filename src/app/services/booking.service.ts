@@ -135,4 +135,30 @@ export class BookingService {
 
     return Reservation;
   }
+
+  public async checkIn(id: number) {
+    const now = this.dateService.getDateTimeNow();
+    const { data, error } = await this.supabaseClient
+      .from('Bookings')
+      .update({
+        CheckIn: now,
+      })
+      .eq('id', id)
+      .select();
+    console.log(error);
+
+    return data;
+  }
+
+  public async checkOut(id: number) {
+    const now = this.dateService.getDateTimeNow();
+    const { data, error } = await this.supabaseClient
+      .from('Bookings')
+      .update({
+        CheckOut: now,
+      })
+      .eq('id', id)
+      .select();
+    return data;
+  }
 }

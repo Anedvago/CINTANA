@@ -148,10 +148,28 @@
       (pressClick)="createReservation()"
       >Guardar Reserva</app-button-blue
     >
-    <app-button-blue
+    <!-- <app-button-blue
       *ngIf="data.origin != undefined && data.origin == 'CHECK'"
       (pressClick)="createReservation()"
       >Realizar Check</app-button-blue
+    > -->
+    <app-button-blue
+      *ngIf="
+        data.origin != undefined &&
+        data.origin == 'CHECK' &&
+        data.reservation.CheckIn == undefined
+      "
+      (pressClick)="checkIn()"
+      >Realizar Check In</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="
+        data.origin != undefined &&
+        data.origin == 'CHECK' &&
+        data.reservation.CheckIn != undefined
+      "
+      (pressClick)="checkOut()"
+      >Realizar Check Out</app-button-blue
     >
   </footer>
 </div>

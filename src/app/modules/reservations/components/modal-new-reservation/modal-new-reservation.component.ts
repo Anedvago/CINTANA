@@ -1,6 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { RoomService } from 'src/app/services/room.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +16,7 @@ import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.comp
 import { ClientService } from 'src/app/services/client.service';
 import { DateService } from 'src/app/services/date.service';
 import { BookingService } from 'src/app/services/booking.service';
+import { ModalCheckOutComponent } from '../modal-check-out/modal-check-out.component';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -57,7 +62,8 @@ export class ModalNewReservationComponent {
     private roomService: RoomService,
     private customerService: ClientService,
     private dateService: DateService,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    public dialog: MatDialog
   ) {
     this.getAllRooms();
     if (data.reservation != undefined) {
@@ -126,9 +132,9 @@ export class ModalNewReservationComponent {
     const dateStart = new Date(this.dateStart);
     const dateEnd = new Date(this.dateEnd);
     const miliSeconds = Math.abs(Number(dateEnd) - Number(dateStart));
-    const days = miliSeconds / 86400000;    
+    const days = miliSeconds / 86400000;
     console.log(days);
-    
+
     this.total = days * 80000 * this.numberOfPeople;
   }
 
@@ -184,4 +190,21 @@ export class ModalNewReservationComponent {
       this.dialogRef.close();
     });
   }
+
+  public checkIn() {
+    this.bookingService.checkIn(this.data.reservation.id).then(() => {
+      this.dialogRef.close();
+    });
+  }
+  public checkOut() {
+    const dialogRef = this.dialog.open(ModalCheckOutComponent, {
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.dialog.closeAll();
+    });
+  }
+
+  openDialog(): void {}
 }
