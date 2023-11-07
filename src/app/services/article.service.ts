@@ -35,6 +35,20 @@ export class ArticleService {
     return Rooms;
   }
 
+  public async getArticleById(id:number): Promise<any[] | null> {
+    let { data: Rooms, error } = await this.supabaseClient
+      .from('Articles')
+      .select('*').eq("id",id)
+    return Rooms;
+  }
+
+  public async getArticleByRef(ref:string): Promise<any[] | null> {
+    let { data: Rooms, error } = await this.supabaseClient
+      .from('Articles')
+      .select('*').eq("ref",ref);
+    return Rooms;
+  }
+
   public async insertNewArticle(article: Article): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Articles')
