@@ -35,7 +35,7 @@
 
   <mat-card class="content">
     <mat-card-content>
-      <app-table [columns]="colums" [columnsDisplay]="columsDisplay" [data]="rows" (clickTr)="openDialog()"></app-table>
+      <app-table [columns]="colums" [columnsDisplay]="columsDisplay" [data]="rows" (clickTr)="openDialog($event)"></app-table>
     </mat-card-content>
   </mat-card>
 

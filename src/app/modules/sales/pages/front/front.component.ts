@@ -36,9 +36,9 @@ export class FrontComponent {
 
   //List
 
-  colums:string[] = ["ref","name","units","value"]
-  columsDisplay:string[]=["Referencia","Nombre","Unidades","Precio"]
-  rows:any = []
+  colums: string[] = ["ref", "name", "units", "value"]
+  columsDisplay: string[] = ["Referencia", "Nombre", "Unidades", "Precio"]
+  rows: any = []
   constructor(private articleService: ArticleService, private alertService: AlertService, public dialog: MatDialog) {
 
   }
@@ -51,28 +51,29 @@ export class FrontComponent {
             this.alertService.simpleAlert("error", "Articulo no encontrado", "Verifique la referencia o codigo del articulo")
           } else {
             console.log(data);
-            this.articles.push(data![0]);
+            this.articles.push({ ...data![0], units: 1 });
             this.rows = this.articles.slice()
           }
 
         })
       } else {
         console.log(data);
-        this.articles.push(data![0]); this.rows = this.articles.slice()
+        this.articles.push({ ...data![0], units: 1 });
+        this.rows = this.articles.slice()
       }
       this.ref = ""
     })
 
   }
 
-  openDialog(): void {
+  openDialog(event:any): void {
+    //const this.articles
     const dialogRef = this.dialog.open(ModalUnitsComponent, {
-      data: { },
+      data: {units:event.units},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-
+      console.log(result);
     });
   }
 }
