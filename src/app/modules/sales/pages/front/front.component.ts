@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-front',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule],
   templateUrl: './front.component.html',
-  styleUrls: ['./front.component.css']
+  styleUrls: ['./front.component.css'],
 })
-export class FrontComponent {
-
-}
+export class FrontComponent {}

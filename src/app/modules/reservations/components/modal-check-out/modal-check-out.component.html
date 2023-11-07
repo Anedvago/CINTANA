@@ -1,5 +1,66 @@
 <div class="container">
-  <h3></h3>
-  <form action=""></form>
-  <footer></footer>
+  <h3>Formulario de Check-Out</h3>
+  <form>
+    <mat-form-field>
+      <mat-label>Estado de las llaves</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado del colchon</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado de las sabanas</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado de las almohadas</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado de los bombillos</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado de las toallas</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Estado de los ventiladores</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let state of states" [value]="state">
+          {{ state }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <footer>
+    <app-button-blue (pressClick)="checkOut()"
+      >Realizar Check Out</app-button-blue
+    >
+  </footer>
 </div>

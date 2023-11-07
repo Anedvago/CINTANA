@@ -17,6 +17,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { DateService } from 'src/app/services/date.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { ModalCheckOutComponent } from '../modal-check-out/modal-check-out.component';
+import { AlertService } from 'src/app/services/alert.service';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -63,7 +64,8 @@ export class ModalNewReservationComponent {
     private customerService: ClientService,
     private dateService: DateService,
     private bookingService: BookingService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private alertService: AlertService
   ) {
     this.getAllRooms();
     if (data.reservation != undefined) {
@@ -139,55 +141,89 @@ export class ModalNewReservationComponent {
   }
 
   public createReservation() {
-    if (this.data.reservation != undefined) {
-      this.bookingService
-        .updateReservation(
-          this.dateService.convertDateInputToStringWithTime(
-            this.dateStart,
-            '12:00'
-          ),
-          this.dateService.convertDateInputToStringWithTime(
-            this.dateEnd,
-            '11:00'
-          ),
-          this.room!,
-          this.customer.id,
-          this.total,
-          this.payed,
-          this.metodPay!,
-          this.numberOfPeople,
-          this.data.reservation.id
-        )
-        .then(() => {
-          this.dialogRef.close();
-        });
+    if (
+      this.dateStart == undefined ||
+      this.dateEnd == undefined ||
+      this.room == undefined ||
+      this.customer == undefined ||
+      this.total == 0 ||
+      this.total == undefined ||
+      this.payed == 0 ||
+      this.payed == undefined ||
+      this.metodPay == undefined ||
+      this.numberOfPeople == undefined
+    ) {
+      this.alertService.simpleAlert(
+        'error',
+        'Error en los datos',
+        'Revise si llenó correctamente el formulario'
+      );
     } else {
-      this.bookingService
-        .createReservation(
-          this.dateService.convertDateInputToStringWithTime(
-            this.dateStart,
-            '12:00'
-          ),
-          this.dateService.convertDateInputToStringWithTime(
-            this.dateEnd,
-            '11:00'
-          ),
-          this.room!,
-          this.customer.id,
-          this.total,
-          this.payed,
-          this.metodPay!,
-          this.numberOfPeople
-        )
-        .then(() => {
-          this.dialogRef.close();
-        });
+      if (this.data.reservation != undefined) {
+        this.bookingService
+          .updateReservation(
+            this.dateService.convertDateInputToStringWithTime(
+              this.dateStart,
+              '12:00'
+            ),
+            this.dateService.convertDateInputToStringWithTime(
+              this.dateEnd,
+              '11:00'
+            ),
+            this.room!,
+            this.customer.id,
+            this.total,
+            this.payed,
+            this.metodPay!,
+            this.numberOfPeople,
+            this.data.reservation.id
+          )
+          .then(() => {
+            this.dialogRef.close();
+            this.alertService.simpleAlert(
+              'success',
+              'Reservacion actualizada con exito!',
+              'Revise el estado de la reserva en el calendario...'
+            );
+          });
+      } else {
+        this.bookingService
+          .createReservation(
+            this.dateService.convertDateInputToStringWithTime(
+              this.dateStart,
+              '12:00'
+            ),
+            this.dateService.convertDateInputToStringWithTime(
+              this.dateEnd,
+              '11:00'
+            ),
+            this.room!,
+            this.customer.id,
+            this.total,
+            this.payed,
+            this.metodPay!,
+            this.numberOfPeople
+          )
+          .then(() => {
+            this.dialogRef.close();
+            this.alertService.simpleAlert(
+              'success',
+              'Reservacion realizada con exito!',
+              'Revise el estado de la reserva en el calendario...'
+            );
+          });
+      }
     }
   }
 
   public deleteReservation() {
     this.bookingService.deleteReservation(this.data.reservation.id).then(() => {
       this.dialogRef.close();
+      this.alertService.simpleAlert(
+        'success',
+        'Reserva Eliminada Correctamente',
+        ''
+      );
     });
   }
 
@@ -198,7 +234,7 @@ export class ModalNewReservationComponent {
   }
   public checkOut() {
     const dialogRef = this.dialog.open(ModalCheckOutComponent, {
-      data: {},
+      data: { reservation: this.data.reservation },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

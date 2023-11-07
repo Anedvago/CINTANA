@@ -11,6 +11,7 @@ import { ModalNewReservationComponent } from '../../components/modal-new-reserva
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-checks',
@@ -42,21 +43,50 @@ export class ChecksComponent {
   constructor(
     private bookingService: BookingService,
     private customerservice: ClientService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private alertService: AlertService
   ) {}
 
   getReservationToCheck() {
-    this.customerservice
-      .getClientsByDni(this.typeIdentification, this.dniCustomer)
-      .then((data: any) => {
-        this.bookingService
-          .getReservationToCheck(data[0].id)
-          .then((data: any) => {
-            console.log(data);
-            this.dialog.open(ModalNewReservationComponent, {
-              data: { reservation: data[0], origin: 'CHECK' },
-            });
-          });
-      });
+    if (
+      this.typeIdentification == undefined ||
+      this.typeIdentification == '' ||
+      this.dniCustomer == undefined ||
+      this.dniCustomer == ''
+    ) {
+      this.alertService.simpleAlert(
+        'error',
+        'Error en los datos',
+        'Complete el formulario de forma correcta...'
+      );
+    } else {
+      this.customerservice
+        .getClientsByDni(this.typeIdentification, this.dniCustomer)
+        .then((data: any) => {
+          if (data.length == 0) {
+            this.alertService.simpleAlert(
+              'error',
+              'Error en la consulta',
+              'El cliente no existe...'
+            );
+          } else {
+            this.bookingService
+              .getReservationToCheck(data[0].id)
+              .then((data: any) => {
+                if (data.length == 0) {
+                  this.alertService.simpleAlert(
+                    'error',
+                    'Error en la consulta',
+                    'El cliente no tiene reservaciones activas...'
+                  );
+                } else {
+                  this.dialog.open(ModalNewReservationComponent, {
+                    data: { reservation: data[0], origin: 'CHECK' },
+                  });
+                }
+              });
+          }
+        });
+    }
   }
 }

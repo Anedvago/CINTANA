@@ -1,0 +1,21 @@
+.container {
+  width: 74vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+mat-card {
+  width: 98%;
+}
+.header {
+  height: 20%;
+}
+.content {
+  height: 60%;
+}
+
+.footer {
+  height: 10%;
+}
