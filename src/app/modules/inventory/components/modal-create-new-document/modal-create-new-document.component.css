@@ -1,0 +1,21 @@
+.container {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+header{
+    height: 10%;
+    
+}
+h3{
+    font-weight: bold;
+}
+form{
+    height: 75%;
+}
+footer{
+    height: 10%;
+}

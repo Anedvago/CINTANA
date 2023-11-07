@@ -39,6 +39,8 @@ export class FormDocumentComponent {
   public filterByNumberFacture: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public quitFilters: EventEmitter<void> = new EventEmitter<void>();
+  @Output()
+  public createNew: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private dateService: DateService) {
 
@@ -71,10 +73,10 @@ export class FormDocumentComponent {
     this.quitFilters.emit();
   }
 
+  */
   public emitCreateNew() {
     this.createNew.emit();
-  } */
-
+  }
   public filterFacture(): void {
     if (this.numberFacture != "") {
       this.filterByNumberFacture.emit(this.numberFacture)

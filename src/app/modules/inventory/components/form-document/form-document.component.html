@@ -28,7 +28,7 @@
     <app-button-blue class="row1">Auditar Factura</app-button-blue>
   </div>
   <div class="row">
-    <app-button-blue class="row2">Crear Documento</app-button-blue>
+    <app-button-blue class="row2" (pressClick)="emitCreateNew()">Crear Documento</app-button-blue>
     <app-button-blue class="row2">Filtrar Categoria</app-button-blue>
     <app-button-blue class="row2">Eliminar Factura</app-button-blue>
     <app-button-blue class="row2" (pressClick)="emitQuitFilters()">Quitar Filtros</app-button-blue>

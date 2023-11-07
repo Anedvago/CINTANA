@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormDocumentComponent } from '../../components/form-document/form-document.component';
 import { TableComponent } from 'src/app/shared/table/table.component';
 import { PusrchaseService } from 'src/app/services/pusrchase.service';
-import { DateService } from 'src/app/services/date.service';
+import { ModalCreateNewDocumentComponent } from '../../components/modal-create-new-document/modal-create-new-document.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-purchases',
   standalone: true,
-  imports: [CommonModule, FormDocumentComponent, TableComponent],
+  imports: [CommonModule, FormDocumentComponent, TableComponent,MatDialogModule],
   templateUrl: './purchases.component.html',
   styleUrls: ['./purchases.component.css'],
 })
@@ -49,7 +50,8 @@ export class PurchasesComponent {
   ];
 
   public factureActive: number = 0;
-  constructor(private purchaseService: PusrchaseService) {
+
+  constructor(private purchaseService: PusrchaseService, public dialog: MatDialog) {
     this.getListFactures();
   }
 
@@ -137,7 +139,7 @@ export class PurchasesComponent {
     }
   }
 
-  public quitFilters():void{
+  public quitFilters(): void {
     this.rowsListF = this.rowsList;
     if (this.rowsListF.length > 0) {
       this.selectFacture(this.rowsListF[0])
@@ -145,5 +147,16 @@ export class PurchasesComponent {
       this.rowsDetails = [];
       this.rowsTotals = [];
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalCreateNewDocumentComponent, {
+      data: { },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+
+    });
   }
 }
