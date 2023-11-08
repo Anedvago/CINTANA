@@ -19,4 +19,14 @@
 app-toolbar {
   width: 23vw;
   background-color: white;
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  width: 0px; /* Ancho de la barra de desplazamiento */
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  
+  border-radius: 0px; /* Radio de esquina de la barra de desplazamiento */
 }
