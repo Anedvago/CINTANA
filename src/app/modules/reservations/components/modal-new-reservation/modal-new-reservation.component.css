@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  overflow: hidden;
 }
 
 h3 {
@@ -13,7 +14,7 @@ h3 {
 }
 
 form {
-  height: 90%;
+  height: 80%;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -66,3 +67,14 @@ footer app-button-blue {
   width: 80% !important;
 }
 
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 90% !important;
+}
+
+.time mat-form-field {
+  width: 48%;
+}
