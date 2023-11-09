@@ -96,7 +96,10 @@ export class ModalCheckOutComponent {
   }
   public checkOut() {
 
-     const content: HTMLElement = this.facturaContent.nativeElement;
+    const url = 'https://cintana-dihi-a7k44gkg--4200--5a198b5c.local-corp.webcontainer.io/admin/reservations/bill';
+    window.open(url, '_blank');
+
+     /*const content: HTMLElement = this.facturaContent.nativeElement;
 
     const options = {
       margin: 10,
@@ -113,8 +116,8 @@ export class ModalCheckOutComponent {
         const blob = new Blob([pdf], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         window.open(url);
-      });
-    
+      });*/
+
     /*this.bookingService.checkOut(this.data.reservation.id).then(() => {
       this.bookingService
         .updateReservation(
