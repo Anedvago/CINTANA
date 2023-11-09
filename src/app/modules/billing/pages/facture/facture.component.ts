@@ -10,6 +10,6 @@ import { CommonModule } from '@angular/common';
 })
 export class FactureComponent {
   constructor() {
-    window.print();
+    //window.print();
   }
 }
