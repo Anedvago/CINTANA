@@ -99,11 +99,11 @@
       <span class="time">
         <mat-form-field>
           <mat-label>Hora</mat-label>
-          <input [(ngModel)]="hourEnd" name="hourEnd" matInput />
+          <input type="number"  min="0" max="23" [(ngModel)]="hourEnd" name="hourEnd" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Minuto</mat-label>
-          <input [(ngModel)]="minuteEnd" name="minuteEnd" matInput matInput />
+          <input type="number"  min="0" max="59" [(ngModel)]="minuteEnd" name="minuteEnd" matInput matInput />
         </mat-form-field>
       </span>
       <!--<mat-form-field>
@@ -139,7 +139,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Metodo de pago</mat-label>
-        <mat-select [(ngModel)]="metodPay" name="metodPay">
+        <mat-select (selectionChange)="calcTotal()" [(ngModel)]="metodPay" name="metodPay">
           <mat-option *ngFor="let pay of typesPay" [value]="pay">{{
             pay | titlecase
           }}</mat-option>

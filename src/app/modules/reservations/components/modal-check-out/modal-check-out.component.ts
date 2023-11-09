@@ -8,6 +8,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { DateService } from 'src/app/services/date.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClientService } from 'src/app/services/client.service';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-check-out',
@@ -17,6 +19,8 @@ import { ClientService } from 'src/app/services/client.service';
     ButtonBlueComponent,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule,
+    FormsModule
   ],
   templateUrl: './modal-check-out.component.html',
   styleUrls: ['./modal-check-out.component.css'],
@@ -50,6 +54,15 @@ export class ModalCheckOutComponent {
   createCustomerState = false;
   nameNewCustomer = '';
   phoneNewCustomer = '';
+
+  charges = [{ name: "Estado de las llaves", state: "Bueno", value: 0 },
+  { name: "Estado del colchón", state: "Bueno", value: 0 },
+  { name: "Estado de las sabanas", state: "Bueno", value: 0 },
+  { name: "Estado de las almohadas", state: "Bueno", value: 0 },
+  { name: "Estado de las bombillos", state: "Bueno", value: 0 },
+  { name: "Estado de las toallas", state: "Bueno", value: 0 },
+  { name: "Estado de las ventiladores", state: "Bueno", value: 0 },
+  { name: "Otros cargos adicionales", state: "Bueno", value: 0 }]
 
   constructor(
     public dialogRef: MatDialogRef<ModalCheckOutComponent>,

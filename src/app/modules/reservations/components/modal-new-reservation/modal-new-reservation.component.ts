@@ -50,7 +50,7 @@ export class ModalNewReservationComponent {
     { name: 'CÉDULA DE EXTRANJERÍA', value: 'CE' },
     { name: 'PASAPORTE', value: 'PA' },
   ];
-  public typesPay = ['EFECTIVO', 'TRANSFERENCIA'];
+  public typesPay = ['EFECTIVO', 'TRANSFERENCIA', 'DATAFONO'];
   customer?: any;
   numberOfAdults = 0;
   numberOfChilds = 0;
@@ -150,9 +150,12 @@ export class ModalNewReservationComponent {
     const miliSeconds = Math.abs(Number(dateEnd) - Number(dateStart));
     const days = miliSeconds / 86400000;
     console.log(days);
-
     this.total =
       days * (80000 * this.numberOfAdults + 40000 * this.numberOfChilds);
+    if (this.metodPay == 'DATAFONO') {
+      this.total = this.total * 1.10
+    }
+
   }
 
   public createReservation() {
@@ -304,5 +307,5 @@ export class ModalNewReservationComponent {
     });
   }
 
-  openDialog(): void {}
+  openDialog(): void { }
 }

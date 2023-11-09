@@ -23,8 +23,22 @@ form {
   overflow-x: hidden;
 }
 
-mat-form-field {
-  width: 40%;
+form span{
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+}
+
+/*mat-form-field {
+  width: 48%;
+}*/
+
+.big{
+  width: 100%;
+}
+
+.small{
+  width: 48%;
 }
 
 footer {
