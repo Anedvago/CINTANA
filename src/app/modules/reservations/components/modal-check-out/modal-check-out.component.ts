@@ -96,7 +96,7 @@ export class ModalCheckOutComponent {
   }
   public checkOut() {
 
-    const url = 'https://cintana-dihi-a7k44gkg--4200--5a198b5c.local-corp.webcontainer.io/admin/reservations/bill';
+    const url = 'https://cintana-dihi-a7k44gkg--4200--5a198b5c.local-corp.webcontainer.io/billing';
     window.open(url, '_blank');
 
      /*const content: HTMLElement = this.facturaContent.nativeElement;
