@@ -80,8 +80,13 @@ export class ChecksComponent {
                     'El cliente no tiene reservaciones activas...'
                   );
                 } else {
+                  const start = new Date();
+                  start.setMonth(start.getMonth());
                   this.dialog.open(ModalNewReservationComponent, {
-                    data: { reservation: data[0], origin: 'CHECK' },
+                    data: {
+                      reservation: { ...data[0], start: start },
+                      origin: 'CHECK',
+                    },
                   });
                 }
               });

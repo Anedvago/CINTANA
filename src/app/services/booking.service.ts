@@ -66,7 +66,8 @@ export class BookingService {
     total: number,
     payed: number,
     metodPay: string,
-    numberOfPeople: number
+    numberOfAdults: number,
+    numberOfChilds: number
   ) {
     const { data, error } = await this.supabaseClient
       .from('Bookings')
@@ -79,7 +80,8 @@ export class BookingService {
           total: total,
           paid: payed,
           wayToPay: metodPay,
-          numberOfPeople: numberOfPeople,
+          numberOfAdults: numberOfAdults,
+          numberOfChilds: numberOfChilds,
         },
       ])
       .select();
@@ -94,7 +96,8 @@ export class BookingService {
     total: number,
     payed: number,
     metodPay: string,
-    numberOfPeople: number,
+    numberOfAdults: number,
+    numberOfChilds: number,
     id: number
   ) {
     const { data, error } = await this.supabaseClient
@@ -108,7 +111,8 @@ export class BookingService {
           total: total,
           paid: payed,
           wayToPay: metodPay,
-          numberOfPeople: numberOfPeople,
+          numberOfAdults: numberOfAdults,
+          numberOfChilds: numberOfChilds,
         },
       ])
       .eq('id', id)
@@ -141,7 +145,7 @@ export class BookingService {
     const { data, error } = await this.supabaseClient
       .from('Bookings')
       .update({
-        CheckIn: now,
+        checkIn: now,
       })
       .eq('id', id)
       .select();
@@ -155,7 +159,7 @@ export class BookingService {
     const { data, error } = await this.supabaseClient
       .from('Bookings')
       .update({
-        CheckOut: now,
+        checkOut: now,
       })
       .eq('id', id)
       .select();

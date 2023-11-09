@@ -8,9 +8,7 @@ import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.comp
 import { BookingService } from 'src/app/services/booking.service';
 import { ModalNewReservationComponent } from '../../components/modal-new-reservation/modal-new-reservation.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import {
-  MatDatepickerModule,
-} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
@@ -51,7 +49,7 @@ export class ReservationsComponent {
   constructor(
     private bookingService: BookingService,
     public dialog: MatDialog,
-    private cdr:ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {
     this.getAllReservations();
   }
@@ -60,27 +58,32 @@ export class ReservationsComponent {
     this.bookingService.getAllReservations().subscribe((data: any) => {
       this.reservations = data!.map((elem: any) => {
         return {
-          id:elem.id,
+          id: elem.id,
           title: `${elem.Customers.name} - ${elem.Rooms.name}`,
           start: elem.start,
           end: elem.end,
           color: elem.Rooms.color,
-          customer:elem.customer,
-          numberOfPeople:elem.numberOfPeople,
-          room:elem.room,
-          wayToPay:elem.wayToPay,
-          total:elem.total,
-          paid:elem.paid
+          customer: elem.customer,
+          numberOfAdults: elem.numberOfAdults,
+          numberOfChilds: elem.numberOfChilds,
+          room: elem.room,
+          wayToPay: elem.wayToPay,
+          total: elem.total,
+          paid: elem.paid,
         };
       });
       this.calendarOptions.events = this.reservations;
-      this.cdr.detectChanges()
+      this.cdr.detectChanges();
     });
   }
-  click(event:any) {
+  click(event: any) {
     console.log('click', event.event.id);
     const dialogRef = this.dialog.open(ModalNewReservationComponent, {
-      data: {reservation:this.reservations.filter(elem => elem.id == event.event.id)[0]},
+      data: {
+        reservation: this.reservations.filter(
+          (elem) => elem.id == event.event.id
+        )[0],
+      },
     });
   }
 

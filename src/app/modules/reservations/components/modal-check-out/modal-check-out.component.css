@@ -7,16 +7,18 @@
   flex-direction: column;
 }
 h3 {
+  height: 10%;
   margin: 10px 0;
   font-weight: bold;
 }
 form {
-  height: 90%;
+  height: 78%;
+  padding-top: 30px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
 }

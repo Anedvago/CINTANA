@@ -39,7 +39,11 @@ export class ModalNewReservationComponent {
   public typeIdentification: string = '';
   public dniCustomer: string = '';
   public dateStart: string = '';
+  public hourStart: string = '12';
+  public minuteStart: string = '00';
   public dateEnd: string = '';
+  public hourEnd: string = '11';
+  public minuteEnd: string = '00';
   public typesIdentifications = [
     { name: 'CÉDULA DE CIUDADANÍA', value: 'CC' },
     { name: 'TARJETA DE IDENTIDAD', value: 'TI' },
@@ -48,7 +52,8 @@ export class ModalNewReservationComponent {
   ];
   public typesPay = ['EFECTIVO', 'TRANSFERENCIA'];
   customer?: any;
-  numberOfPeople = 0;
+  numberOfAdults = 0;
+  numberOfChilds = 0;
   room?: number;
   metodPay?: string;
   total: number = 0;
@@ -74,14 +79,21 @@ export class ModalNewReservationComponent {
   }
 
   setReservationInStage() {
+    const start = new Date(this.data.reservation.start);
+    const end = new Date(this.data.reservation.end);
     this.getCustomerById(this.data.reservation.customer);
     this.dateStart = this.data.reservation.start;
     this.dateEnd = this.data.reservation.end;
-    this.numberOfPeople = this.data.reservation.numberOfPeople;
+    this.numberOfAdults = this.data.reservation.numberOfAdults;
+    this.numberOfChilds = this.data.reservation.numberOfChilds;
     this.room = this.data.reservation.room;
     this.metodPay = this.data.reservation.wayToPay;
     this.total = this.data.reservation.total;
     this.payed = this.data.reservation.paid;
+    this.hourStart = start.getHours().toString().padStart(2, '0');
+    this.minuteStart = start.getMinutes().toString().padStart(2, '0');
+    this.hourEnd = end.getHours().toString().padStart(2, '0');
+    this.minuteEnd = end.getMinutes().toString().padStart(2, '0');
   }
 
   onNoClick(): void {
@@ -133,11 +145,14 @@ export class ModalNewReservationComponent {
     this.total = 0;
     const dateStart = new Date(this.dateStart);
     const dateEnd = new Date(this.dateEnd);
+    dateStart.setHours(0, 0);
+    dateEnd.setHours(0, 0);
     const miliSeconds = Math.abs(Number(dateEnd) - Number(dateStart));
     const days = miliSeconds / 86400000;
     console.log(days);
 
-    this.total = days * 80000 * this.numberOfPeople;
+    this.total =
+      days * (80000 * this.numberOfAdults + 40000 * this.numberOfChilds);
   }
 
   public createReservation() {
@@ -151,7 +166,8 @@ export class ModalNewReservationComponent {
       this.payed == 0 ||
       this.payed == undefined ||
       this.metodPay == undefined ||
-      this.numberOfPeople == undefined
+      this.numberOfAdults == undefined ||
+      this.numberOfChilds == undefined
     ) {
       this.alertService.simpleAlert(
         'error',
@@ -164,18 +180,25 @@ export class ModalNewReservationComponent {
           .updateReservation(
             this.dateService.convertDateInputToStringWithTime(
               this.dateStart,
-              '12:00'
+              `${this.hourStart.padStart(2, '0')}:${this.minuteStart.padStart(
+                2,
+                '0'
+              )}`
             ),
             this.dateService.convertDateInputToStringWithTime(
               this.dateEnd,
-              '11:00'
+              `${this.hourEnd.padStart(2, '0')}:${this.minuteEnd.padStart(
+                2,
+                '0'
+              )}`
             ),
             this.room!,
             this.customer.id,
             this.total,
             this.payed,
             this.metodPay!,
-            this.numberOfPeople,
+            this.numberOfAdults,
+            this.numberOfChilds,
             this.data.reservation.id
           )
           .then(() => {
@@ -191,18 +214,25 @@ export class ModalNewReservationComponent {
           .createReservation(
             this.dateService.convertDateInputToStringWithTime(
               this.dateStart,
-              '12:00'
+              `${this.hourStart.padStart(2, '0')}:${this.minuteStart.padStart(
+                2,
+                '0'
+              )}`
             ),
             this.dateService.convertDateInputToStringWithTime(
               this.dateEnd,
-              '11:00'
+              `${this.hourEnd.padStart(2, '0')}:${this.minuteEnd.padStart(
+                2,
+                '0'
+              )}`
             ),
             this.room!,
             this.customer.id,
             this.total,
             this.payed,
             this.metodPay!,
-            this.numberOfPeople
+            this.numberOfAdults,
+            this.numberOfChilds
           )
           .then(() => {
             this.dialogRef.close();
@@ -229,7 +259,39 @@ export class ModalNewReservationComponent {
 
   public checkIn() {
     this.bookingService.checkIn(this.data.reservation.id).then(() => {
-      this.dialogRef.close();
+      this.bookingService
+        .updateReservation(
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateStart,
+            `${this.hourStart.padStart(2, '0')}:${this.minuteStart.padStart(
+              2,
+              '0'
+            )}`
+          ),
+          this.dateService.convertDateInputToStringWithTime(
+            this.dateEnd,
+            `${this.hourEnd.padStart(2, '0')}:${this.minuteEnd.padStart(
+              2,
+              '0'
+            )}`
+          ),
+          this.room!,
+          this.customer.id,
+          this.total,
+          this.payed,
+          this.metodPay!,
+          this.numberOfAdults,
+          this.numberOfChilds,
+          this.data.reservation.id
+        )
+        .then(() => {
+          this.dialogRef.close();
+          this.alertService.simpleAlert(
+            'success',
+            'Check In Realizado con exito!!',
+            'Revise el estado de la reserva en el calendario...'
+          );
+        });
     });
   }
   public checkOut() {

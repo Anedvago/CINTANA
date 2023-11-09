@@ -6,16 +6,25 @@
       <mat-form-field>
         <mat-label>Tipo de identificacion</mat-label>
         <mat-select [(ngModel)]="typeIdentification" name="typeIdentification">
-          <mat-option value="one" *ngFor="let type of typesIdentifications" [value]="type.value">{{ type.name |
-            titlecase }}</mat-option>
+          <mat-option
+            value="one"
+            *ngFor="let type of typesIdentifications"
+            [value]="type.value"
+            >{{ type.name | titlecase }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Identificacion del cliente</mat-label>
         <input matInput [(ngModel)]="dniCustomer" name="dniCustomer" />
       </mat-form-field>
-      <div class="container-button" *ngIf="createCustomerState == false && customer == undefined">
-        <app-button-blue (pressClick)="getCustomerByDni()">Buscar Cliente</app-button-blue>
+      <div
+        class="container-button"
+        *ngIf="createCustomerState == false && customer == undefined"
+      >
+        <app-button-blue (pressClick)="getCustomerByDni()"
+          >Buscar Cliente</app-button-blue
+        >
       </div>
       <span *ngIf="customer">
         <mat-form-field>
@@ -38,43 +47,63 @@
         </mat-form-field>
       </span>
       <div class="container-button" *ngIf="createCustomerState == true">
-        <app-button-blue (pressClick)="createNewCustomer()">Crear Nuevo Cliente</app-button-blue>
+        <app-button-blue (pressClick)="createNewCustomer()"
+          >Crear Nuevo Cliente</app-button-blue
+        >
       </div>
     </div>
     <div class="column-form">
       <h3>Datos de la reserva</h3>
       <mat-form-field>
         <mat-label>Fecha De Entrada</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="dateStart" name="dateStart" (dateChange)="calcTotal()" />
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="dateStart"
+          name="dateStart"
+          (dateChange)="calcTotal()"
+        />
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <span class="time">
         <mat-form-field>
           <mat-label>Hora</mat-label>
-          <input matInput />
+          <input [(ngModel)]="hourStart" name="hourStart" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Minuto</mat-label>
-          <input matInput />
+          <input [(ngModel)]="minuteStart" name="minuteStart" matInput />
         </mat-form-field>
       </span>
       <mat-form-field>
         <mat-label>Fecha De Salida</mat-label>
-        <input matInput [matDatepicker]="picker2" [(ngModel)]="dateEnd" name="dateEnd" (dateChange)="calcTotal()" />
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [(ngModel)]="dateEnd"
+          name="dateEnd"
+          (dateChange)="calcTotal()"
+        />
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <span class="time">
         <mat-form-field>
           <mat-label>Hora</mat-label>
-          <input matInput />
+          <input [(ngModel)]="hourEnd" name="hourEnd" matInput />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Minuto</mat-label>
-          <input matInput />
+          <input [(ngModel)]="minuteEnd" name="minuteEnd" matInput matInput />
         </mat-form-field>
       </span>
       <!--<mat-form-field>
@@ -83,11 +112,21 @@
       </mat-form-field>-->
       <mat-form-field>
         <mat-label>Cantidad de adultos</mat-label>
-        <input matInput [(ngModel)]="numberOfPeople" name="numberOfPeople" (keyup)="calcTotal()" />
+        <input
+          matInput
+          [(ngModel)]="numberOfAdults"
+          name="numberOfAdults"
+          (keyup)="calcTotal()"
+        />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Cantidad de niños</mat-label>
-        <input matInput [(ngModel)]="numberOfPeople" name="numberOfPeople" (keyup)="calcTotal()" />
+        <input
+          matInput
+          [(ngModel)]="numberOfChilds"
+          name="numberOfChilds"
+          (keyup)="calcTotal()"
+        />
       </mat-form-field>
 
       <mat-form-field>
@@ -95,7 +134,7 @@
         <mat-select [(ngModel)]="room" name="room">
           <mat-option *ngFor="let room of rooms" [value]="room.id">{{
             room.name
-            }}</mat-option>
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -103,7 +142,7 @@
         <mat-select [(ngModel)]="metodPay" name="metodPay">
           <mat-option *ngFor="let pay of typesPay" [value]="pay">{{
             pay | titlecase
-            }}</mat-option>
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -130,26 +169,41 @@
     </div>
   </form>
   <footer>
-    <app-button-blue *ngIf="
+    <app-button-blue
+      *ngIf="
         data.reservation != undefined &&
         (data.origin == undefined || data.origin != 'CHECK')
-      " (pressClick)="deleteReservation()">Eliminar Reserva</app-button-blue>
-    <app-button-blue *ngIf="data.origin == undefined || data.origin != 'CHECK'"
-      (pressClick)="createReservation()">Guardar Reserva</app-button-blue>
+      "
+      (pressClick)="deleteReservation()"
+      >Eliminar Reserva</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="data.origin == undefined || data.origin != 'CHECK'"
+      (pressClick)="createReservation()"
+      >Guardar Reserva</app-button-blue
+    >
     <!-- <app-button-blue
       *ngIf="data.origin != undefined && data.origin == 'CHECK'"
       (pressClick)="createReservation()"
       >Realizar Check</app-button-blue
     > -->
-    <app-button-blue *ngIf="
+    <app-button-blue
+      *ngIf="
         data.origin != undefined &&
         data.origin == 'CHECK' &&
-        data.reservation.CheckIn == undefined
-      " (pressClick)="checkIn()">Realizar Check In</app-button-blue>
-    <app-button-blue *ngIf="
+        data.reservation.checkIn == undefined
+      "
+      (pressClick)="checkIn()"
+      >Realizar Check In</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="
         data.origin != undefined &&
         data.origin == 'CHECK' &&
-        data.reservation.CheckIn != undefined
-      " (pressClick)="checkOut()">Realizar Check Out</app-button-blue>
+        data.reservation.checkIn != undefined
+      "
+      (pressClick)="checkOut()"
+      >Realizar Check Out</app-button-blue
+    >
   </footer>
 </div>
