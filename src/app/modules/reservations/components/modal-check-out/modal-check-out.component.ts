@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BookingService } from 'src/app/services/booking.service';
@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ClientService } from 'src/app/services/client.service';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
+import * as html2pdf from 'html2pdf.js';
 @Component({
   selector: 'app-modal-check-out',
   standalone: true,
@@ -64,6 +64,8 @@ export class ModalCheckOutComponent {
   { name: "Estado de las ventiladores", state: "Bueno", value: 0 },
   { name: "Otros cargos adicionales", state: "Bueno", value: 0 }]
 
+  @ViewChild('facturaContent', { static: false }) facturaContent!: ElementRef;
+
   constructor(
     public dialogRef: MatDialogRef<ModalCheckOutComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -93,7 +95,27 @@ export class ModalCheckOutComponent {
     this.minuteEnd = end.getMinutes().toString().padStart(2, '0');
   }
   public checkOut() {
-    this.bookingService.checkOut(this.data.reservation.id).then(() => {
+
+     const content: HTMLElement = this.facturaContent.nativeElement;
+
+    const options = {
+      margin: 10,
+      filename: 'factura.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf()
+      .from(content)
+      .set(options)
+      .outputPdf((pdf:any) => {
+        const blob = new Blob([pdf], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      });
+    
+    /*this.bookingService.checkOut(this.data.reservation.id).then(() => {
       this.bookingService
         .updateReservation(
           this.dateService.convertDateInputToStringWithTime(
@@ -127,7 +149,7 @@ export class ModalCheckOutComponent {
             'Revise el estado de la reserva en el calendario...'
           );
         });
-    });
+    });*/
   }
 
   public getCustomerById(id: number) {

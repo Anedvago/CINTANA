@@ -29,6 +29,7 @@
     "@swimlane/ngx-charts": "^20.4.1",
     "@types/d3": "^7.4.1",
     "d3": "^7.8.5",
+    "html2pdf.js": "^0.10.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.7.31",
     "tslib": "^2.3.0",

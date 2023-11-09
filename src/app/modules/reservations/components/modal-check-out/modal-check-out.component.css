@@ -53,3 +53,7 @@ footer app-button-blue {
   height: 70% !important;
   width: 30% !important;
 }
+
+.facture{
+  visibility: hidden;
+}

@@ -15,106 +15,12 @@
         <input [(ngModel)]="charge.value" name="charge.value" matInput />
       </mat-form-field>
     </span>
-    <!--<span>
-      <mat-form-field>
-        <mat-label>Estado de las llaves</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado del colchon</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado de las sabanas</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado de las almohadas</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado de los bombillos</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado de las toallas</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>
-    <span>
-      <mat-form-field>
-        <mat-label>Estado de los ventiladores</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let state of states" [value]="state">
-            {{ state }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Cargo</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </span>-->
   </form>
   <footer>
     <app-button-blue (pressClick)="checkOut()">Realizar Check Out</app-button-blue>
   </footer>
+</div>
+
+<div #facturaContent class="facture">
+  <h1>Factura #01</h1>
 </div>
