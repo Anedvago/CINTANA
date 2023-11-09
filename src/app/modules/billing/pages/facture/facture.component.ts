@@ -9,5 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./facture.component.css']
 })
 export class FactureComponent {
-
+  constructor() {
+    window.print();
+  }
 }
