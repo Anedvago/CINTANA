@@ -11,6 +11,8 @@ export class BookingService {
   private supabaseClient!: SupabaseClient;
   private supabaseEnvironments: { apiKey: string; url: string } =
     environment.supabase;
+
+  private reservationSelected: any;
   constructor(private dateService: DateService) {
     this.supabaseClient = createClient(
       this.supabaseEnvironments.url,
@@ -136,7 +138,6 @@ export class BookingService {
       .gte('start', today)
       .lte('start', tomorrow)
       .eq('customer', idCustomer);
-
     return Reservation;
   }
 

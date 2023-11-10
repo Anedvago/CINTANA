@@ -19,20 +19,52 @@
   </div>-->
 
 <div class="container">
-  <div class="row">
+  <div class="row-h">
     <span class="logo">
-      <img src="./assets/img/logo.jpg" alt="logo">
+      <img src="./assets/img/logo.jpg" alt="logo" />
     </span>
-    <span class="name"></span>
-    <span class="bill"></span>
+    <span class="name">
+      <h2>El portal de la Cintana</h2>
+      <span>Posada turistica</span>
+      <span>Via a Minca, Santa Marta, Magdalena</span>
+    </span>
+    <span class="bill">
+      <h2>Factura</h2>
+      <span>Serie:</span>
+      <span>Numero</span>
+      <span>Fecha:</span>
+    </span>
   </div>
   <div class="row">
-
+    <h2>Informacion del cliente</h2>
+    <app-table
+      [data]="rowsCustomer"
+      [columns]="columsCustomer"
+      [columnsDisplay]="columsCustomer"
+    ></app-table>
   </div>
   <div class="row">
-
+    <h2>Informacion de alojamiento</h2>
+    <app-table
+      [data]="rowsCustomer"
+      [columns]="columsCustomer"
+      [columnsDisplay]="columsCustomer"
+    ></app-table>
   </div>
   <div class="row">
-
+    <h2>Informacion de servicios adicionales</h2>
+    <app-table
+      [data]="rowsCustomer"
+      [columns]="columsCustomer"
+      [columnsDisplay]="columsCustomer"
+    ></app-table>
+  </div>
+  <div class="row">
+    <h2>Informacion de cargos</h2>
+    <app-table
+      [data]="rowsCustomer"
+      [columns]="columsCustomer"
+      [columnsDisplay]="columsCustomer"
+    ></app-table>
   </div>
 </div>

@@ -1,19 +1,47 @@
-.container{
+.container {
   display: flex;
-  flex-direction:column ;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
 }
-.row{
+.row-h {
   display: flex;
   flex-direction: row;
-  height: 30vh;
-  background-color: aqua;
+  height: 33vh;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  height: 33vh;
+  width: 100%;
+  align-items: center;
+}
 
-}
-.logo{
-  width: 30%;
+.logo {
+  width: 33%;
   height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-img{
+
+.name,
+.bill {
+  width: 33%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+img {
   height: auto;
-  width: auto;
+  width: 100%;
+}
+app-table {
+  width: 100%;
 }

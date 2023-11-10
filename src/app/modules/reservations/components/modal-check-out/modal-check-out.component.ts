@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { ClientService } from 'src/app/services/client.service';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import * as html2pdf from 'html2pdf.js';
+
 @Component({
   selector: 'app-modal-check-out',
   standalone: true,
@@ -20,7 +20,7 @@ import * as html2pdf from 'html2pdf.js';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './modal-check-out.component.html',
   styleUrls: ['./modal-check-out.component.css'],
@@ -55,14 +55,16 @@ export class ModalCheckOutComponent {
   nameNewCustomer = '';
   phoneNewCustomer = '';
 
-  charges = [{ name: "Estado de las llaves", state: "Bueno", value: 0 },
-  { name: "Estado del colchón", state: "Bueno", value: 0 },
-  { name: "Estado de las sabanas", state: "Bueno", value: 0 },
-  { name: "Estado de las almohadas", state: "Bueno", value: 0 },
-  { name: "Estado de las bombillos", state: "Bueno", value: 0 },
-  { name: "Estado de las toallas", state: "Bueno", value: 0 },
-  { name: "Estado de las ventiladores", state: "Bueno", value: 0 },
-  { name: "Otros cargos adicionales", state: "Bueno", value: 0 }]
+  charges = [
+    { name: 'Estado de las llaves', state: 'Bueno', value: 0 },
+    { name: 'Estado del colchón', state: 'Bueno', value: 0 },
+    { name: 'Estado de las sabanas', state: 'Bueno', value: 0 },
+    { name: 'Estado de las almohadas', state: 'Bueno', value: 0 },
+    { name: 'Estado de las bombillos', state: 'Bueno', value: 0 },
+    { name: 'Estado de las toallas', state: 'Bueno', value: 0 },
+    { name: 'Estado de las ventiladores', state: 'Bueno', value: 0 },
+    { name: 'Otros cargos adicionales', state: 'Bueno', value: 0 },
+  ];
 
   @ViewChild('facturaContent', { static: false }) facturaContent!: ElementRef;
 
@@ -95,12 +97,10 @@ export class ModalCheckOutComponent {
     this.minuteEnd = end.getMinutes().toString().padStart(2, '0');
   }
   public checkOut() {
-
-    const url = 'https://cintana-dihi-a7k44gkg--4200--5a198b5c.local-corp.webcontainer.io/billing';
+    const url = `./billing/${this.customer.id}`;
     window.open(url, '_blank');
-    
 
-     /*const content: HTMLElement = this.facturaContent.nativeElement;
+    /*const content: HTMLElement = this.facturaContent.nativeElement;
 
     const options = {
       margin: 10,
