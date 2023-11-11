@@ -137,6 +137,7 @@ export class BookingService {
       .select()
       .gte('start', today)
       .lte('start', tomorrow)
+      .is('checkIn', null)
       .eq('customer', idCustomer);
 
     return Reservation;
