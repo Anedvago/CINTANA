@@ -153,9 +153,8 @@ export class ModalNewReservationComponent {
     this.total =
       days * (80000 * this.numberOfAdults + 40000 * this.numberOfChilds);
     if (this.metodPay == 'DATAFONO') {
-      this.total = this.total * 1.10
+      this.total = this.total * 1.1;
     }
-
   }
 
   public createReservation() {
@@ -307,5 +306,5 @@ export class ModalNewReservationComponent {
     });
   }
 
-  openDialog(): void { }
+  findServiceByName() {}
 }

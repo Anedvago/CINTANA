@@ -138,6 +138,19 @@ export class BookingService {
       .gte('start', today)
       .lte('start', tomorrow)
       .eq('customer', idCustomer);
+
+    return Reservation;
+  }
+
+  public async getReservationToCheckOut(idCustomer: number) {
+    const today = this.dateService.getDateTimeNowInit();
+    const tomorrow = this.dateService.getDateTimeTomorrowInit();
+    const { data: Reservation, error } = await this.supabaseClient
+      .from('Bookings')
+      .select()
+      .is('checkOut', null)
+      .eq('customer', idCustomer);
+
     return Reservation;
   }
 

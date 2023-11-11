@@ -70,15 +70,34 @@ export class ChecksComponent {
               'El cliente no existe...'
             );
           } else {
+            const id = data[0].id;
             this.bookingService
               .getReservationToCheck(data[0].id)
               .then((data: any) => {
+                console.log(data);
                 if (data.length == 0) {
-                  this.alertService.simpleAlert(
-                    'error',
-                    'Error en la consulta',
-                    'El cliente no tiene reservaciones activas...'
-                  );
+                  this.bookingService
+                    .getReservationToCheckOut(id)
+                    .then((data: any) => {
+                      if (data.length == 0) {
+                        this.alertService.simpleAlert(
+                          'error',
+                          'Error en la consulta',
+                          'El cliente no tiene reservaciones activas...'
+                        );
+                      } else {
+                        console.log(data);
+
+                        const start = new Date();
+                        start.setMonth(start.getMonth());
+                        this.dialog.open(ModalNewReservationComponent, {
+                          data: {
+                            reservation: { ...data[0], start: start },
+                            origin: 'CHECK',
+                          },
+                        });
+                      }
+                    });
                 } else {
                   const start = new Date();
                   start.setMonth(start.getMonth());

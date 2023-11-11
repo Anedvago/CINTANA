@@ -97,7 +97,12 @@ export class ModalCheckOutComponent {
     this.minuteEnd = end.getMinutes().toString().padStart(2, '0');
   }
   public checkOut() {
-    const url = `./billing/${this.customer.id}`;
+    const chargesValues = this.charges.map((elem) => {
+      return elem.value;
+    });
+    console.log(chargesValues.join('-'));
+
+    const url = `./billing/${this.customer.id}/${chargesValues.join('-')}`;
     window.open(url, '_blank');
 
     /*const content: HTMLElement = this.facturaContent.nativeElement;

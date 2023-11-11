@@ -28,29 +28,32 @@
       <span>Posada turistica</span>
       <span>Via a Minca, Santa Marta, Magdalena</span>
     </span>
-    <span class="bill">
+    <span class="bill" *ngIf="reservation">
       <h2>Factura</h2>
-      <span>Serie:</span>
-      <span>Numero</span>
-      <span>Fecha:</span>
+      <span>Serie: A101</span>
+      <span>Numero: {{ reservation.id }}</span>
+      <span>Fecha: {{ reservation.checkOut }}</span>
     </span>
   </div>
-  <div class="row">
-    <h2>Informacion del cliente</h2>
+  <div class="row-client">
+    <h3>Informacion del cliente</h3>
     <app-table
-      [data]="rowsCustomer"
+      *ngIf="customer"
+      [data]="[customer]"
       [columns]="columsCustomer"
-      [columnsDisplay]="columsCustomer"
+      [columnsDisplay]="columsCustomerDisplay"
     ></app-table>
   </div>
   <div class="row">
-    <h2>Informacion de alojamiento</h2>
+    <h3>Informacion de alojamiento</h3>
     <app-table
-      [data]="rowsCustomer"
-      [columns]="columsCustomer"
-      [columnsDisplay]="columsCustomer"
+      *ngIf="reservation"
+      [data]="rowsReservation"
+      [columns]="columsReservation"
+      [columnsDisplay]="columsReservationDisplay"
     ></app-table>
   </div>
+  <!--
   <div class="row">
     <h2>Informacion de servicios adicionales</h2>
     <app-table
@@ -66,5 +69,5 @@
       [columns]="columsCustomer"
       [columnsDisplay]="columsCustomer"
     ></app-table>
-  </div>
+  </div> -->
 </div>

@@ -2,22 +2,24 @@
   <h3>Formulario de Check-Out</h3>
   <form>
     <span *ngFor="let charge of charges">
-      <mat-form-field [ngClass]="{'small':charge.state == 'Malo','big':charge.state == 'Bueno'}">
-        <mat-label> {{charge.name}} </mat-label>
+      <mat-form-field class="small">
+        <mat-label> {{ charge.name }} </mat-label>
         <mat-select [(ngModel)]="charge.state" name="charge.state">
           <mat-option *ngFor="let state of states" [value]="state">
             {{ state }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="small" *ngIf="charge.state == 'Malo'">
+      <mat-form-field class="small">
         <mat-label>Cargo</mat-label>
         <input [(ngModel)]="charge.value" name="charge.value" matInput />
       </mat-form-field>
     </span>
   </form>
   <footer>
-    <app-button-blue (pressClick)="checkOut()">Realizar Check Out</app-button-blue>
+    <app-button-blue (pressClick)="checkOut()"
+      >Realizar Check Out</app-button-blue
+    >
   </footer>
 </div>
 
