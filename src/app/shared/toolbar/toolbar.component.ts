@@ -2,12 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonToolbarComponent } from '../button-toolbar/button-toolbar.component';
 import { ButtonToolbarToggleComponent } from '../button-toolbar-toggle/button-toolbar-toggle.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [CommonModule, ButtonToolbarComponent, ButtonToolbarToggleComponent],
+  imports: [
+    CommonModule,
+    ButtonToolbarComponent,
+    ButtonToolbarToggleComponent,
+    RouterModule,
+  ],
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
 })
@@ -17,6 +22,7 @@ export class ToolbarComponent {
     { name: 'inventario', active: false, route: 'inventory' },
     { name: 'reservaciones', active: false, route: 'reservations' },
     { name: 'punto de venta', active: false, route: 'sales' },
+    { name: 'Cerrar Sesión', active: false, route: '' },
   ];
 
   public buttonsDropDownInventory = [
@@ -44,5 +50,12 @@ export class ToolbarComponent {
       return elem.active == true;
     });
     return index;
+  }
+
+  logOut() {
+    this.router.navigate(['../login']).then(() => {
+      // Después de la redirección, recargar la página
+      location.reload();
+    });
   }
 }

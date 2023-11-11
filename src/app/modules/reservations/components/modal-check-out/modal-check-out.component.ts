@@ -102,7 +102,7 @@ export class ModalCheckOutComponent {
     });
     console.log(chargesValues.join('-'));
 
-    const url = `./billing/${this.customer.id}/${chargesValues.join('-')}`;
+    const url = `./#/billing/${this.customer.id}/${chargesValues.join('-')}`;
     window.open(url, '_blank');
     this.dialogRef.close();
 

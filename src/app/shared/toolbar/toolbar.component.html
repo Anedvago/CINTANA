@@ -22,5 +22,8 @@
     <app-button-toolbar (click)="tabClicked(3)" [button]="buttons[3]">
       {{ buttons[3].name | titlecase }}</app-button-toolbar
     >
+    <app-button-toolbar [button]="buttons[4]" [routerLink]="['../login']">
+      {{ buttons[4].name | titlecase }}</app-button-toolbar
+    >
   </div>
 </div>

@@ -43,21 +43,29 @@
       <mat-card class="graphic table-small">
         <mat-card-content
           ><app-table
+            *ngIf="rowsStock.length > 0"
             [data]="rowsStock"
             [columns]="columnsStock"
             [columnsDisplay]="columnsStock"
-          ></app-table
-        ></mat-card-content>
+          ></app-table>
+          <h2 *ngIf="rowsStock.length == 0">
+            No existen clientes en habitaciones ocupadas o en reserva...
+          </h2></mat-card-content
+        >
       </mat-card>
     </div>
     <div class="tables">
       <mat-card class="table">
         <mat-card-content>
           <app-table
+            *ngIf="rowsInd.length > 0"
             [data]="rowsInd"
             [columns]="columnsInd"
             [columnsDisplay]="columnsIndDisplay"
           ></app-table>
+          <h2 *ngIf="rowsInd.length == 0">
+            No existen clientes en habitaciones ocupadas o en reserva...
+          </h2>
         </mat-card-content>
       </mat-card>
     </div>
