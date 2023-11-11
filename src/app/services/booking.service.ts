@@ -174,6 +174,7 @@ export class BookingService {
       .from('Bookings')
       .update({
         checkOut: now,
+        end: now,
       })
       .eq('id', id)
       .select();

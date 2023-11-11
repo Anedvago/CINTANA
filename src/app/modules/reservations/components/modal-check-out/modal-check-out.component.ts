@@ -104,6 +104,7 @@ export class ModalCheckOutComponent {
 
     const url = `./billing/${this.customer.id}/${chargesValues.join('-')}`;
     window.open(url, '_blank');
+    this.dialogRef.close();
 
     /*const content: HTMLElement = this.facturaContent.nativeElement;
 
@@ -124,7 +125,7 @@ export class ModalCheckOutComponent {
         window.open(url);
       });*/
 
-    /*this.bookingService.checkOut(this.data.reservation.id).then(() => {
+    /* this.bookingService.checkOut(this.data.reservation.id).then(() => {
       this.bookingService
         .updateReservation(
           this.dateService.convertDateInputToStringWithTime(
@@ -154,11 +155,11 @@ export class ModalCheckOutComponent {
           this.dialogRef.close();
           this.alertService.simpleAlert(
             'success',
-            'Check In Realizado con exito!!',
+            'Check Out Realizado con exito!!',
             'Revise el estado de la reserva en el calendario...'
           );
         });
-    });*/
+    }); */
   }
 
   public getCustomerById(id: number) {

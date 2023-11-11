@@ -55,6 +55,8 @@ export class FactureComponent {
   ];
 
   rowsReservation: any[] = [];
+  idReservation!: number;
+  date!: string;
 
   obtenerReserva() {
     const date = new Date();
@@ -63,6 +65,8 @@ export class FactureComponent {
     this.bookingService
       .getReservationToCheckOut(this.idCustomer!)
       .then((data: any) => {
+        this.idReservation = data[0].id;
+        this.date = now;
         this.reservation = {
           name: `Servicios de habitacion o cabaña`,
           value: data[0]!.total,
@@ -105,7 +109,9 @@ export class FactureComponent {
 
   esperar() {
     setTimeout(() => {
-      window.print();
+      this.bookingService.checkOut(this.idReservation).then(() => {
+        window.print();
+      });
     }, 2000);
   }
   formatearMonedaColombiana(numero): string {
