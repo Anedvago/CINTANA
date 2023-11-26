@@ -99,11 +99,26 @@
       <span class="time">
         <mat-form-field>
           <mat-label>Hora</mat-label>
-          <input type="number"  min="0" max="23" [(ngModel)]="hourEnd" name="hourEnd" matInput />
+          <input
+            type="number"
+            min="0"
+            max="23"
+            [(ngModel)]="hourEnd"
+            name="hourEnd"
+            matInput
+          />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Minuto</mat-label>
-          <input type="number"  min="0" max="59" [(ngModel)]="minuteEnd" name="minuteEnd" matInput matInput />
+          <input
+            type="number"
+            min="0"
+            max="59"
+            [(ngModel)]="minuteEnd"
+            name="minuteEnd"
+            matInput
+            matInput
+          />
         </mat-form-field>
       </span>
       <!--<mat-form-field>
@@ -139,7 +154,11 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Metodo de pago</mat-label>
-        <mat-select (selectionChange)="calcTotal()" [(ngModel)]="metodPay" name="metodPay">
+        <mat-select
+          (selectionChange)="calcTotal()"
+          [(ngModel)]="metodPay"
+          name="metodPay"
+        >
           <mat-option *ngFor="let pay of typesPay" [value]="pay">{{
             pay | titlecase
           }}</mat-option>
@@ -158,10 +177,21 @@
       <h3>Datos de los servicios</h3>
       <mat-form-field>
         <mat-label>Buscar Servicio</mat-label>
-        <input matInput />
+        <input
+          [(ngModel)]="nameService"
+          name="nameService"
+          (keyup)="emitValueByFindServiceName()"
+          matInput
+        />
       </mat-form-field>
       <mat-card>
-        <mat-card-content>Esta funcion aun no esta disponible</mat-card-content>
+        <mat-card-content
+          ><ul class="list-group">
+            <li *ngFor="let service of services" class="list-group-item">
+              {{ service.name | titlecase }}
+            </li>
+          </ul></mat-card-content
+        >
       </mat-card>
       <mat-card>
         <mat-card-content>Esta funcion aun no esta disponible</mat-card-content>

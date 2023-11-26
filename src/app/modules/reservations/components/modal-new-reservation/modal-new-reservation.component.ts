@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MAT_DIALOG_DATA,
@@ -18,6 +18,8 @@ import { DateService } from 'src/app/services/date.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { ModalCheckOutComponent } from '../modal-check-out/modal-check-out.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { ServicesService } from 'src/app/services/services.service';
+import { Subject, debounceTime } from 'rxjs';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -34,7 +36,7 @@ import { AlertService } from 'src/app/services/alert.service';
   templateUrl: './modal-new-reservation.component.html',
   styleUrls: ['./modal-new-reservation.component.css'],
 })
-export class ModalNewReservationComponent {
+export class ModalNewReservationComponent implements OnInit {
   public rooms: any = [];
   public typeIdentification: string = '';
   public dniCustomer: string = '';
@@ -61,6 +63,8 @@ export class ModalNewReservationComponent {
   createCustomerState = false;
   nameNewCustomer = '';
   phoneNewCustomer = '';
+  nameService: string = '';
+  services: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<ModalNewReservationComponent>,
@@ -70,12 +74,21 @@ export class ModalNewReservationComponent {
     private dateService: DateService,
     private bookingService: BookingService,
     public dialog: MatDialog,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private serviceService: ServicesService
   ) {
     this.getAllRooms();
     if (data.reservation != undefined) {
       this.setReservationInStage();
     }
+  }
+
+  private debouncer = new Subject<string>();
+
+  ngOnInit(): void {
+    this.debouncer.pipe(debounceTime(1000)).subscribe(() => {
+      this.findServiceByName();
+    });
   }
 
   setReservationInStage() {
@@ -296,6 +309,7 @@ export class ModalNewReservationComponent {
         });
     });
   }
+
   public checkOut() {
     const dialogRef = this.dialog.open(ModalCheckOutComponent, {
       data: { reservation: this.data.reservation },
@@ -306,5 +320,16 @@ export class ModalNewReservationComponent {
     });
   }
 
-  findServiceByName() {}
+  emitValueByFindServiceName() {
+    this.debouncer.next(this.nameService);
+  }
+
+  findServiceByName() {
+    this.serviceService
+      .getServiceByName(this.nameService.toUpperCase())
+      .then((data) => {
+        this.services = data!;
+        console.log(this.services);
+      });
+  }
 }

@@ -25,15 +25,23 @@ export class ServicesService {
     return Rooms;
   }
 
+  public async getServiceByName(name: string): Promise<any[] | null> {
+    let { data: Services, error } = await this.supabaseClient
+      .from('Services')
+      .select('*')
+      .like('name', `%${name}%`);
+    return Services;
+  }
+
   public async insertNewService(service: Service): Promise<any[] | null> {
     let { data: Rooms, error } = await this.supabaseClient
       .from('Services')
       .insert([this.serviceNameUpper(service)])
-      .select('*')
+      .select('*');
     console.log(service);
-    
-      console.log(error);
-      
+
+    console.log(error);
+
     return Rooms;
   }
 
@@ -46,13 +54,11 @@ export class ServicesService {
     return Rooms;
   }
 
-  public async deleteService(
-    id: number
-  ): Promise<any | null> {
+  public async deleteService(id: number): Promise<any | null> {
     const { error } = await this.supabaseClient
       .from('Services')
       .delete()
-      .eq('id', id)
+      .eq('id', id);
 
     return error;
   }
