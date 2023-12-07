@@ -20,6 +20,8 @@ import { ModalCheckOutComponent } from '../modal-check-out/modal-check-out.compo
 import { AlertService } from 'src/app/services/alert.service';
 import { ServicesService } from 'src/app/services/services.service';
 import { Subject, debounceTime } from 'rxjs';
+import { MatListModule } from '@angular/material/list';
+import { Service } from 'src/app/models/Service';
 @Component({
   selector: 'app-modal-new-reservation',
   standalone: true,
@@ -32,6 +34,7 @@ import { Subject, debounceTime } from 'rxjs';
     MatDatepickerModule,
     MatCardModule,
     ButtonBlueComponent,
+    MatListModule,
   ],
   templateUrl: './modal-new-reservation.component.html',
   styleUrls: ['./modal-new-reservation.component.css'],
@@ -331,5 +334,9 @@ export class ModalNewReservationComponent implements OnInit {
         this.services = data!;
         console.log(this.services);
       });
+  }
+
+  agregarServicioHabitacion(servicio: Service) {
+    console.log(servicio);
   }
 }

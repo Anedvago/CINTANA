@@ -184,14 +184,18 @@
           matInput
         />
       </mat-form-field>
-      <mat-card>
-        <mat-card-content
-          ><ul class="list-group">
-            <li *ngFor="let service of services" class="list-group-item">
-              {{ service.name | titlecase }}
-            </li>
-          </ul></mat-card-content
-        >
+      <mat-card class="lista-servicios">
+        <mat-card-content>
+          <mat-list role="list">
+            <mat-list-item
+              *ngFor="let service of services"
+              role="listitem"
+              (click)="agregarServicioHabitacion(service)"
+            >
+              {{ service.name | titlecase }}</mat-list-item
+            >
+          </mat-list>
+        </mat-card-content>
       </mat-card>
       <mat-card>
         <mat-card-content>Esta funcion aun no esta disponible</mat-card-content>

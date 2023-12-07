@@ -78,3 +78,10 @@ footer app-button-blue {
 .time mat-form-field {
   width: 48%;
 }
+.lista-servicios {
+  overflow: auto;
+}
+mat-list-item:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
