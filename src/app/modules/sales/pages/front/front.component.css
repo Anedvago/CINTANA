@@ -7,7 +7,22 @@
   align-items: center;
 }
 
-mat-card {
+app-form-head {
+  height: 23%;
+  width: 98%;
+}
+
+app-list-articles {
+  height: 55%;
+  width: 98%;
+}
+
+app-totals {
+  height: 15%;
+  width: 98%;
+}
+
+/* mat-card {
   width: 98%;
 }
 
@@ -41,4 +56,4 @@ margin: 0 10px;
 
 .footer {
   height: 10%;
-}
+} */
