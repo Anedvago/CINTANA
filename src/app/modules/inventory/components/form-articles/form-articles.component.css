@@ -6,6 +6,7 @@ form {
   align-items: center;
   justify-content: space-evenly;
 }
+
 .row {
   display: flex;
   flex-direction: row;
@@ -14,16 +15,19 @@ form {
   align-items: center;
   justify-content: space-evenly;
 }
+
 .row1 {
   width: 24%;
   height: 100%;
   overflow: hidden;
 }
+
 .row1-big {
   width: 32%;
   height: 100%;
   overflow: hidden;
 }
+
 .row2 {
   width: 32%;
   height: 100%;

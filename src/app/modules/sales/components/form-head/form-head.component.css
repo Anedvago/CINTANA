@@ -1,3 +1,71 @@
 mat-card {
     height: 100%;
+    width: 100%;
+
 }
+
+mat-card-content {
+    width: auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 20px;
+}
+
+#cont-btn-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#cont-btn-art button {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 5px;
+    background-color: #3056d3 !important;
+    color: white !important;
+    border-radius: 0 !important;
+}
+
+
+/* 
+mat-card-content {
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: aqua;
+}
+
+
+#cont-btn-art {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aqua;
+    overflow: hidden;
+}
+
+#cont-btn-art button {
+    height: 60%;
+    width: 100%;
+    background-color: bisque;
+    margin: 0px;
+}
+
+#cont-btn-art form {
+    height: 30%;
+    width: 20%;
+    margin: 0px;
+}
+
+#cont-form {
+    width: 80%;
+    height: 100%;
+    background-color: blue;
+} */
