@@ -28,6 +28,26 @@ mat-card-content {
     border-radius: 0 !important;
 }
 
+/* #cont-form {
+
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+} */
+
+#cont-form form {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    gap: 20px;
+}
+
+#cont-form form mat-form-field {
+    width: 100%;
+}
 
 /* 
 mat-card-content {

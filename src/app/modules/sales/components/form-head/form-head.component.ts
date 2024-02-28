@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class FormHeadComponent {
 
-  formasDePago: string[] = ["1", "2"]
-  opcionesVentaPara: string[] = ["3", "4"]
+  formasDePago: string[] = ["EFECTIVO", "TRANSFERENCIA", "DATAFONO", "CHECK-OUT"]
+  opcionesVentaPara: string[] = ["CLIENTE", "HABITACION"]
+
 }
