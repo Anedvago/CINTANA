@@ -49,6 +49,10 @@ mat-card-content {
     width: 100%;
 }
 
+.form-aux {
+    width: 100%;
+}
+
 /* 
 mat-card-content {
     height: 100%;

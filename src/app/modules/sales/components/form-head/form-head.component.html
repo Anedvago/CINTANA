@@ -17,17 +17,37 @@
             <form>
                 <mat-form-field>
                     <mat-label>Venta Para</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="ventaPara" name="ventaPara">
                         <mat-option *ngFor="let opcion of opcionesVentaPara" [value]="opcion">{{opcion}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Forma De Pago</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let formaPago of formasDePago"
+                        <mat-option *ngFor="let formaPago of opcionesFormasDePago"
                             [value]="formaPago">{{formaPago}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div *ngIf="ventaPara == 'CLIENTE'" class="form-aux">
+                    <mat-form-field>
+                        <mat-label>Identificación</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput disabled>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="ventaPara == 'HABITACION'" class="form-aux">
+                    <mat-form-field>
+                        <mat-label>Habitacion</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let habitacion of habitaciones"
+                                [value]="habitacion.id">{{habitacion.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
             </form>
         </div>
     </mat-card-content>
