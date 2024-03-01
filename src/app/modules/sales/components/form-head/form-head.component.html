@@ -9,7 +9,8 @@
             <form>
                 <mat-form-field class="example-full-width">
                     <mat-label>Referencia</mat-label>
-                    <input matInput>
+                    <input [(ngModel)]="referencia" name="referencia" matInput
+                        (keydown.enter)="buscarArticuloPorReferencia()">
                 </mat-form-field>
             </form>
         </div>
