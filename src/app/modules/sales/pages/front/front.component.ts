@@ -12,5 +12,13 @@ import { TotalsComponent } from '../../components/totals/totals.component';
 })
 export class FrontComponent {
 
+  listaDeArticulos: any[] = [];
 
+  manejadorDeArticuloEncontrado(event: any) {
+    //aqui se puede hacer algo para sumar las unidades automaticamente
+    this.listaDeArticulos.push(event);
+    this.listaDeArticulos = this.listaDeArticulos.map((articulo: any) => {
+      return { ...articulo, unidades: "1", descuento: "0", valorTotal: articulo.value }
+    })
+  }
 }

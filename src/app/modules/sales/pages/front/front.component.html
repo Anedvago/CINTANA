@@ -42,7 +42,7 @@
   <mat-card class="footer">
     <mat-card-content>Simple card</mat-card-content>
   </mat-card> -->
-  <app-form-head></app-form-head>
-  <app-list-articles></app-list-articles>
+  <app-form-head (articuloEncontrado)="manejadorDeArticuloEncontrado($event)"> </app-form-head>
+  <app-list-articles [listaDeArticulos]="listaDeArticulos"></app-list-articles>
   <app-totals></app-totals>
 </div>

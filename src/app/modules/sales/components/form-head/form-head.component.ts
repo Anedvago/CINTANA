@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,8 @@ export class FormHeadComponent implements OnInit {
   habitaciones: any[] = [];
   referencia: string = ""
   listaDeArticulos: any[] = [];
+  @Output() articuloEncontrado: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(private habitacionService: RoomService, private articuloService: ArticleService, private alertaService: AlertService) {
 
@@ -42,8 +44,9 @@ export class FormHeadComponent implements OnInit {
   buscarArticuloPorReferencia() {
     this.articuloService.getArticleByRef(this.referencia).then((data: any) => {
       if (data.length > 0) {
-        this.listaDeArticulos.push(data[0]);
-        console.log(this.listaDeArticulos);
+        this.articuloEncontrado.emit(data[0]);
+        //this.listaDeArticulos.push(data[0]);
+        //console.log(this.listaDeArticulos);
         //AQUI CAMBIAR Y COLOCAR UN OUTPUT CADA QUE SE BUSQUE UN ARTICULO
         //EN EL COMPONENTE PADRE QUE SE VAYA GUARDANDO LA LISTA DE ARTICULOS
         //QUE EL COMPONENTE PADRE LE ENVIE LA LISTA AL OTRO COMPONENTE QUE LISTA LOS ARTICULOS
