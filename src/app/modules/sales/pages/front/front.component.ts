@@ -13,6 +13,7 @@ import { TotalsComponent } from '../../components/totals/totals.component';
 export class FrontComponent {
 
   listaDeArticulos: any[] = [];
+  totales: any;
 
   manejadorDeArticuloEncontrado(event: any) {
     //aqui se puede hacer algo para sumar las unidades automaticamente
@@ -20,5 +21,19 @@ export class FrontComponent {
     this.listaDeArticulos = this.listaDeArticulos.map((articulo: any) => {
       return { ...articulo, unidades: "1", descuento: "0", valorTotal: articulo.value }
     })
+    this.calcularTotales();
+  }
+  calcularTotales() {
+    let totalBruto: number = 0;
+    let totalDescuento: number = 0;
+    let totalNeto: number = 0;
+
+    this.listaDeArticulos.forEach(element => {
+      totalBruto += parseInt(element.value);
+      totalDescuento += element.descuento;
+      totalNeto += element.value - element.descuento;
+    });
+
+    this.totales = [{ totalBruto: totalBruto, totalDescuento: totalDescuento, totalNeto: totalNeto }]
   }
 }
