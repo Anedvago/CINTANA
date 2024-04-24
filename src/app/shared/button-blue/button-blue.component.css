@@ -7,3 +7,7 @@ button {
   width: 100% !important;
   height: 100% !important;
 }
+.disabled {
+  background-color: #8590b3 !important;
+  color: rgb(202, 180, 180) !important;
+}

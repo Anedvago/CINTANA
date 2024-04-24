@@ -1,0 +1,44 @@
+.container {
+  width: 80vw;
+  height: 94vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  overflow: hidden;
+}
+h3 {
+  margin: 10px 0;
+  font-weight: bold;
+}
+form {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.columna {
+  width: 32%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+mat-form-field {
+  width: 90%;
+}
+
+.container-button {
+  display: flex;
+  height: 12%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-button app-button-blue {
+  height: 70% !important;
+  width: 80% !important;
+}

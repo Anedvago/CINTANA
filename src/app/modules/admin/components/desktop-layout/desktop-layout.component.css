@@ -27,6 +27,5 @@ app-toolbar {
 }
 
 ::-webkit-scrollbar-thumb {
-  
   border-radius: 0px; /* Radio de esquina de la barra de desplazamiento */
 }

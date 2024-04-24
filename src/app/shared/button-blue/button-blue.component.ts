@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./button-blue.component.css'],
 })
 export class ButtonBlueComponent {
+  @Input() desactivado: boolean = false;
   @Output()
   public pressClick: EventEmitter<void> = new EventEmitter<void>();
 

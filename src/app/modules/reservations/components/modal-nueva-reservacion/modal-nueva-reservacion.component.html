@@ -1,0 +1,49 @@
+<div class="container">
+  <h3>Formulario de nueva reserva</h3>
+  <form [formGroup]="formularioCliente">
+    <div class="columna">
+      <h3>Datos del cliente</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de identificacion</mat-label>
+        <mat-select formControlName="tipoIdentificacion">
+          <mat-option
+            *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
+            [value]="tipoIdentificacion.value"
+          >
+            {{ tipoIdentificacion.name | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Identificacion</mat-label>
+        <input matInput formControlName="identificacion" />
+      </mat-form-field>
+      <div *ngIf="cliente || crearCliente">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="nombre" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Telefono</mat-label>
+          <input type="number" matInput formControlName="telefono" />
+        </mat-form-field>
+      </div>
+      <div
+        class="container-button"
+        *ngIf="cliente == undefined && crearCliente == false"
+      >
+        <app-button-blue (pressClick)="buscarClientePorIdentificacion()"
+          >Buscar Cliente</app-button-blue
+        >
+      </div>
+      <div class="container-button" *ngIf="crearCliente == true">
+        <app-button-blue
+          (pressClick)="crearNuevoCliente()"
+          [desactivado]="formularioCliente.invalid"
+        >
+          Crear Nuevo Cliente
+        </app-button-blue>
+      </div>
+    </div>
+  </form>
+</div>

@@ -10,6 +10,7 @@ import { ModalNewReservationComponent } from '../../components/modal-new-reserva
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ModalNuevaReservacionComponent } from '../../components/modal-nueva-reservacion/modal-nueva-reservacion.component';
 
 @Component({
   selector: 'app-reservations',
@@ -88,7 +89,10 @@ export class ReservationsComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+    /*  const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+      data: {},
+    }); */
+    const dialogRef = this.dialog.open(ModalNuevaReservacionComponent, {
       data: {},
     });
 
