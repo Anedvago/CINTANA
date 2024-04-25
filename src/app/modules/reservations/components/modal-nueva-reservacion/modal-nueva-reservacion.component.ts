@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ClientService } from 'src/app/services/client.service';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-modal-nueva-reservacion',
@@ -17,6 +18,7 @@ import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.comp
     MatSelectModule,
     MatInputModule,
     ButtonBlueComponent,
+    MatDatepickerModule
   ],
   templateUrl: './modal-nueva-reservacion.component.html',
   styleUrls: ['./modal-nueva-reservacion.component.css'],
@@ -36,6 +38,20 @@ export class ModalNuevaReservacionComponent {
   });
   cliente: any;
   crearCliente = false;
+  formularioReserva = this.formBuilder.group({
+    fechaEntada: ['', [Validators.required]],
+    horaEntrada: ['', [Validators.required]],
+    minutoEntrada: ['', [Validators.required]],
+    fechaSalida: ['', [Validators.required]],
+    horaSalida: ['', [Validators.required]],
+    minutoSalida: ['', [Validators.required]],
+    cantidadAdultos: ['', [Validators.required]],
+    cantidadNiños: ['', [Validators.required]],
+    habitacion: ['', [Validators.required]],
+    metodoDePago: ['', [Validators.required]],
+    totalAPagar: ['', [Validators.required]],
+    totalCancelado: ['', [Validators.required]],
+  });
   constructor(
     private formBuilder: FormBuilder,
     private customerService: ClientService

@@ -1,56 +1,120 @@
 <div class="container">
   <h3>Formulario de nueva reserva</h3>
-  <form [formGroup]="formularioCliente">
+  <div class="formularios">
     <div class="columna">
-      <h3>Datos del cliente</h3>
-      <mat-form-field appearance="fill">
-        <mat-label>Tipo de identificacion</mat-label>
-        <mat-select formControlName="tipoIdentificacion">
-          <mat-option
-            *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
-            [value]="tipoIdentificacion.value"
-          >
-            {{ tipoIdentificacion.name | titlecase }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Identificacion</mat-label>
-        <input matInput formControlName="identificacion" />
-      </mat-form-field>
-      <div *ngIf="cliente || crearCliente">
+      <form [formGroup]="formularioCliente">
+        <h3>Datos del cliente</h3>
         <mat-form-field appearance="fill">
-          <mat-label>Nombre</mat-label>
-          <input type="text" matInput formControlName="nombre" />
+          <mat-label>Tipo de identificacion</mat-label>
+          <mat-select formControlName="tipoIdentificacion">
+            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
+              [value]="tipoIdentificacion.value">
+              {{ tipoIdentificacion.name | titlecase }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>Telefono</mat-label>
-          <input type="number" matInput formControlName="telefono" />
+          <mat-label>Identificacion</mat-label>
+          <input matInput formControlName="identificacion" />
         </mat-form-field>
-      </div>
-      <div
-        class="container-button"
-        *ngIf="cliente == undefined && crearCliente == false"
-      >
-        <app-button-blue (pressClick)="buscarClientePorIdentificacion()"
-          >Buscar Cliente</app-button-blue
-        >
-      </div>
-      <div class="container-button" *ngIf="crearCliente == true">
-        <app-button-blue
-          (pressClick)="crearNuevoCliente()"
-          [desactivado]="formularioCliente.invalid"
-        >
-          Crear Nuevo Cliente
-        </app-button-blue>
-      </div>
+        <div *ngIf="cliente || crearCliente">
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="nombre" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input type="number" matInput formControlName="telefono" />
+          </mat-form-field>
+        </div>
+        <div class="container-button" *ngIf="cliente == undefined && crearCliente == false">
+          <app-button-blue (pressClick)="buscarClientePorIdentificacion()"
+            [desactivado]="formularioCliente.get('identificacion')!.invalid">Buscar Cliente</app-button-blue>
+        </div>
+        <div class="container-button" *ngIf="crearCliente == true">
+          <app-button-blue (pressClick)="crearNuevoCliente()" [desactivado]="formularioCliente.invalid">
+            Crear Nuevo Cliente
+          </app-button-blue>
+        </div>
+      </form>
     </div>
     <div class="columna">
       <h3>Datos de la reserva</h3>
-      
+      <form [formGroup]="formularioReserva">
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="tiempo">
+          <mat-form-field appearance="fill">
+            <mat-label>Hora</mat-label>
+            <input type="number" matInput formControlName="telefono" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Minuto</mat-label>
+            <input type="number" matInput formControlName="telefono" />
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="tiempo">
+          <mat-form-field appearance="fill">
+            <mat-label>Hora</mat-label>
+            <input type="number" matInput formControlName="telefono" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Minuto</mat-label>
+            <input type="number" matInput formControlName="telefono" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>adultos</mat-label>
+          <input type="number" matInput formControlName="telefono" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>niños</mat-label>
+          <input type="number" matInput formControlName="telefono" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Habitacion</mat-label>
+          <mat-select formControlName="tipoIdentificacion">
+            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
+              [value]="tipoIdentificacion.value">
+              {{ tipoIdentificacion.name | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Metodo de pago</mat-label>
+          <mat-select formControlName="tipoIdentificacion">
+            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
+              [value]="tipoIdentificacion.value">
+              {{ tipoIdentificacion.name | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Total a pagar</mat-label>
+          <input type="number" matInput formControlName="telefono" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Total Cancelado</mat-label>
+          <input type="number" matInput formControlName="telefono" />
+        </mat-form-field>
+      </form>
     </div>
     <div class="columna">
       <h3>Datos de los servicios</h3>
     </div>
-  </form>
+  </div>
+
+
 </div>
