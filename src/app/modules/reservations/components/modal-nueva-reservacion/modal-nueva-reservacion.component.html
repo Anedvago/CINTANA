@@ -7,8 +7,13 @@
         <mat-form-field appearance="fill">
           <mat-label>Tipo de identificacion</mat-label>
           <mat-select formControlName="tipoIdentificacion">
-            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
-              [value]="tipoIdentificacion.value">
+            <mat-option
+              *ngFor="
+                let tipoIdentificacion of tiposDeIdentificacion;
+                index as i
+              "
+              [value]="tipoIdentificacion.value"
+            >
               {{ tipoIdentificacion.name | titlecase }}
             </mat-option>
           </mat-select>
@@ -27,12 +32,21 @@
             <input type="number" matInput formControlName="telefono" />
           </mat-form-field>
         </div>
-        <div class="container-button" *ngIf="cliente == undefined && crearCliente == false">
-          <app-button-blue (pressClick)="buscarClientePorIdentificacion()"
-            [desactivado]="formularioCliente.get('identificacion')!.invalid">Buscar Cliente</app-button-blue>
+        <div
+          class="container-button"
+          *ngIf="cliente == undefined && crearCliente == false"
+        >
+          <app-button-blue
+            (pressClick)="buscarClientePorIdentificacion()"
+            [desactivado]="formularioCliente.get('identificacion')!.invalid"
+            >Buscar Cliente</app-button-blue
+          >
         </div>
         <div class="container-button" *ngIf="crearCliente == true">
-          <app-button-blue (pressClick)="crearNuevoCliente()" [desactivado]="formularioCliente.invalid">
+          <app-button-blue
+            (pressClick)="crearNuevoCliente()"
+            [desactivado]="formularioCliente.invalid"
+          >
             Crear Nuevo Cliente
           </app-button-blue>
         </div>
@@ -42,72 +56,90 @@
       <h3>Datos de la reserva</h3>
       <form [formGroup]="formularioReserva">
         <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <mat-label>Fecha de entrada</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaEntrada"
+          />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <div class="tiempo">
           <mat-form-field appearance="fill">
             <mat-label>Hora</mat-label>
-            <input type="number" matInput formControlName="telefono" />
+            <input type="number" matInput formControlName="horaEntrada" />
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Minuto</mat-label>
-            <input type="number" matInput formControlName="telefono" />
+            <input type="number" matInput formControlName="minutoEntrada" />
           </mat-form-field>
         </div>
         <mat-form-field>
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <mat-label>Fecha de salida</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            formControlName="fechaSalida"
+          />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <div class="tiempo">
           <mat-form-field appearance="fill">
             <mat-label>Hora</mat-label>
-            <input type="number" matInput formControlName="telefono" />
+            <input type="number" matInput formControlName="horaSalida" />
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Minuto</mat-label>
-            <input type="number" matInput formControlName="telefono" />
+            <input type="number" matInput formControlName="minutoSalida" />
           </mat-form-field>
         </div>
         <mat-form-field appearance="fill">
-          <mat-label>adultos</mat-label>
-          <input type="number" matInput formControlName="telefono" />
+          <mat-label>Adultos</mat-label>
+          <input type="number" matInput formControlName="cantidadAdultos" />
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>niños</mat-label>
-          <input type="number" matInput formControlName="telefono" />
+          <mat-label>Niños</mat-label>
+          <input type="number" matInput formControlName="cantidadNiños" />
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Habitacion</mat-label>
-          <mat-select formControlName="tipoIdentificacion">
-            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
-              [value]="tipoIdentificacion.value">
-              {{ tipoIdentificacion.name | titlecase }}
+          <mat-select formControlName="habitacion">
+            <mat-option
+              *ngFor="let habitacion of habitaciones; index as i"
+              [value]="habitacion.id"
+            >
+              {{ habitacion.name | titlecase }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Metodo de pago</mat-label>
-          <mat-select formControlName="tipoIdentificacion">
-            <mat-option *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
-              [value]="tipoIdentificacion.value">
-              {{ tipoIdentificacion.name | titlecase }}
+          <mat-select formControlName="metodoDePago">
+            <mat-option
+              *ngFor="let metodo of metodosDePago; index as i"
+              [value]="metodo"
+            >
+              {{ metodo | titlecase }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Total a pagar</mat-label>
-          <input type="number" matInput formControlName="telefono" />
+          <input type="number" matInput formControlName="totalAPagar" />
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Total Cancelado</mat-label>
-          <input type="number" matInput formControlName="telefono" />
+          <input type="number" matInput formControlName="totalCancelado" />
         </mat-form-field>
       </form>
     </div>
@@ -115,6 +147,38 @@
       <h3>Datos de los servicios</h3>
     </div>
   </div>
-
-
+  <footer>
+    <app-button-blue
+      *ngIf="
+        data.reservation != undefined &&
+        (data.origin == undefined || data.origin != 'CHECK')
+      "
+      (pressClick)="borrarReserva()"
+      >Eliminar Reserva</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="data.origin == undefined || data.origin != 'CHECK'"
+      (pressClick)="crearReserva()"
+      [desactivado]="formularioReserva.invalid || cliente == undefined"
+      >Guardar Reserva</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="
+        data.origin != undefined &&
+        data.origin == 'CHECK' &&
+        data.reservation.checkIn == undefined
+      "
+      (pressClick)="checkIn()"
+      >Realizar Check In</app-button-blue
+    >
+    <app-button-blue
+      *ngIf="
+        data.origin != undefined &&
+        data.origin == 'CHECK' &&
+        data.reservation.checkIn != undefined
+      "
+      (pressClick)="checkOut()"
+      >Realizar Check Out</app-button-blue
+    >
+  </footer>
 </div>

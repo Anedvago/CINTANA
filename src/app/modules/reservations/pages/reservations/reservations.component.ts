@@ -79,7 +79,14 @@ export class ReservationsComponent {
   }
   click(event: any) {
     console.log('click', event.event.id);
-    const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+    /* const dialogRef = this.dialog.open(ModalNewReservationComponent, {
+      data: {
+        reservation: this.reservations.filter(
+          (elem) => elem.id == event.event.id
+        )[0],
+      },
+    }); */
+    const dialogRef = this.dialog.open(ModalNuevaReservacionComponent, {
       data: {
         reservation: this.reservations.filter(
           (elem) => elem.id == event.event.id
