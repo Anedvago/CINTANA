@@ -13,11 +13,12 @@ import { ClientService } from 'src/app/services/client.service';
 import { ButtonBlueComponent } from 'src/app/shared/button-blue/button-blue.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RoomService } from 'src/app/services/room.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BookingService } from 'src/app/services/booking.service';
 import { DateService } from 'src/app/services/date.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { debounceTime } from 'rxjs';
+import { ModalCheckOutComponent } from '../modal-check-out/modal-check-out.component';
 
 @Component({
   selector: 'app-modal-nueva-reservacion',
@@ -73,6 +74,7 @@ export class ModalNuevaReservacionComponent {
     private bookingService: BookingService,
     private dateService: DateService,
     private alertService: AlertService,
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<ModalNuevaReservacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -365,7 +367,53 @@ export class ModalNuevaReservacionComponent {
     });
   }
 
-  checkIn() {}
+  public checkIn() {
+    this.bookingService.checkIn(this.data.reservation.id).then(() => {
+      this.bookingService
+        .updateReservation(
+          this.dateService.convertDateInputToStringWithTime(
+            this.formularioReserva.get('fechaEntrada')?.value!,
+            `${this.formularioReserva
+              .get('horaEntrada')
+              ?.value!.padStart(2, '0')}:${this.formularioReserva
+              .get('minutoEntrada')
+              ?.value!.padStart(2, '0')}`
+          ),
+          this.dateService.convertDateInputToStringWithTime(
+            this.formularioReserva.get('fechaSalida')?.value!,
+            `${this.formularioReserva
+              .get('horaSalida')
+              ?.value!.padStart(2, '0')}:${this.formularioReserva
+              .get('minutoSalida')
+              ?.value!.padStart(2, '0')}`
+          ),
+          parseInt(this.formularioReserva.get('habitacion')?.value!),
+          this.cliente.id,
+          parseInt(this.formularioReserva.get('totalAPagar')?.value!),
+          parseInt(this.formularioReserva.get('totalCancelado')?.value!),
+          this.formularioReserva.get('metodoDePago')?.value!,
+          parseInt(this.formularioReserva.get('cantidadAdultos')?.value!),
+          parseInt(this.formularioReserva.get('cantidadNiños')?.value!),
+          this.data.reservation.id
+        )
+        .then(() => {
+          this.dialogRef.close();
+          this.alertService.simpleAlert(
+            'success',
+            'Check In Realizado con exito!!',
+            'Revise el estado de la reserva en el calendario...'
+          );
+        });
+    });
+  }
 
-  checkOut() {}
+  public checkOut() {
+    const dialogRef = this.dialog.open(ModalCheckOutComponent, {
+      data: { reservation: this.data.reservation },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.dialog.closeAll();
+    });
+  }
 }

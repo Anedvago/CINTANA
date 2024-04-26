@@ -125,7 +125,7 @@ export class ModalCheckOutComponent {
         window.open(url);
       });*/
 
-    /* this.bookingService.checkOut(this.data.reservation.id).then(() => {
+    /* this.bookingService(this.data.reservation.id).then(() => {
       this.bookingService
         .updateReservation(
           this.dateService.convertDateInputToStringWithTime(

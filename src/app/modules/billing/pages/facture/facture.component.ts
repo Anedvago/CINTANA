@@ -108,14 +108,14 @@ export class FactureComponent {
   }
 
   esperar() {
-    /* setTimeout(() => {
+    setTimeout(() => {
       this.bookingService.checkOut(this.idReservation).then(() => {
         window.print();
       });
-    }, 2000); */
-    setTimeout(() => {
-      window.print();
     }, 2000);
+    /*  setTimeout(() => {
+      window.print();
+    }, 2000); */
   }
   formatearMonedaColombiana(numero): string {
     const formatoColombiano = new Intl.NumberFormat('es-CO', {

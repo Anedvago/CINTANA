@@ -12,6 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AlertService } from 'src/app/services/alert.service';
+import { ModalNuevaReservacionComponent } from '../../components/modal-nueva-reservacion/modal-nueva-reservacion.component';
 
 @Component({
   selector: 'app-checks',
@@ -90,7 +91,7 @@ export class ChecksComponent {
 
                         const start = new Date();
                         start.setMonth(start.getMonth());
-                        this.dialog.open(ModalNewReservationComponent, {
+                        this.dialog.open(ModalNuevaReservacionComponent, {
                           data: {
                             reservation: { ...data[0], start: start },
                             origin: 'CHECK',
@@ -101,7 +102,7 @@ export class ChecksComponent {
                 } else {
                   const start = new Date();
                   start.setMonth(start.getMonth());
-                  this.dialog.open(ModalNewReservationComponent, {
+                  this.dialog.open(ModalNuevaReservacionComponent, {
                     data: {
                       reservation: { ...data[0], start: start },
                       origin: 'CHECK',
