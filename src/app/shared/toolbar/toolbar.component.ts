@@ -21,6 +21,7 @@ export class ToolbarComponent {
     { name: 'inicio', active: true, route: 'dashboard' },
     { name: 'inventario', active: false, route: 'inventory' },
     { name: 'reservaciones', active: false, route: 'reservations' },
+    { name: 'pasadias', active: false, route: 'pasadias' },
     { name: 'punto de venta', active: false, route: 'sales' },
     { name: 'Cerrar Sesión', active: false, route: '' },
   ];

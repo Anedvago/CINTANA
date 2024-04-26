@@ -25,6 +25,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('../sales/sales.routes').then((m) => m.routes),
       },
+      {
+        path: 'pasadias',
+        loadChildren: () =>
+          import('../pasadias/pasadias.routes').then((m) => m.routes),
+      },
     ],
   },
 ];
