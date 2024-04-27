@@ -1,0 +1,62 @@
+<div class="container">
+  <h3>Registro de nuevo pasadia</h3>
+  <form [formGroup]="formularioPasaDia">
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de identificacion</mat-label>
+      <mat-select formControlName="tipoIdentificacion">
+        <mat-option
+          *ngFor="let tipoIdentificacion of tiposDeIdentificacion; index as i"
+          [value]="tipoIdentificacion.value"
+        >
+          {{ tipoIdentificacion.name | titlecase }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Identificacion</mat-label>
+      <input matInput formControlName="identificacion" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="cliente || crearCliente">
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput formControlName="nombre" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" *ngIf="cliente || crearCliente">
+      <mat-label>Telefono</mat-label>
+      <input type="number" matInput formControlName="telefono" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha </mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <footer *ngIf="cliente == undefined && crearCliente == false">
+    <app-button-blue
+      (pressClick)="buscarClientePorIdentificacion()"
+      [desactivado]="formularioPasaDia.get('identificacion')!.invalid"
+      >Buscar Cliente</app-button-blue
+    >
+  </footer>
+  <footer *ngIf="crearCliente == true">
+    <app-button-blue
+      (pressClick)="crearNuevoCliente()"
+      [desactivado]="formularioPasaDia.invalid"
+    >
+      Crear Nuevo Cliente
+    </app-button-blue>
+  </footer>
+  <footer>
+    <app-button-blue
+      [desactivado]="formularioPasaDia.invalid || cliente == undefined"
+      (pressClick)="crearPasadia()"
+    >
+      Guardar pasadia
+    </app-button-blue>
+  </footer>
+</div>
