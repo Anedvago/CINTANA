@@ -22,8 +22,11 @@
     <app-button-toolbar (click)="tabClicked(3)" [button]="buttons[3]">
       {{ buttons[3].name | titlecase }}</app-button-toolbar
     >
-    <app-button-toolbar [button]="buttons[4]" [routerLink]="['../login']">
+    <app-button-toolbar [button]="buttons[4]" (click)="tabClicked(4)">
       {{ buttons[4].name | titlecase }}</app-button-toolbar
+    >
+    <app-button-toolbar [button]="buttons[5]" [routerLink]="['../login']">
+      {{ buttons[5].name | titlecase }}</app-button-toolbar
     >
   </div>
 </div>
