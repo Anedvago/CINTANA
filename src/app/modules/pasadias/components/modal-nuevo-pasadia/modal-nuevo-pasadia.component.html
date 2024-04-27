@@ -55,8 +55,16 @@
     <app-button-blue
       [desactivado]="formularioPasaDia.invalid || cliente == undefined"
       (pressClick)="crearPasadia()"
+      *ngIf="cliente != undefined"
     >
       Guardar pasadia
+    </app-button-blue>
+    <app-button-blue
+      [desactivado]="formularioPasaDia.invalid || cliente == undefined"
+      (pressClick)="eliminarPasadia()"
+      *ngIf="cliente != undefined && data.pasadia"
+    >
+      Eliminar pasadia
     </app-button-blue>
   </footer>
 </div>

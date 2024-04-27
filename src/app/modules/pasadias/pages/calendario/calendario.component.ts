@@ -61,7 +61,19 @@ export class CalendarioComponent {
       data: { operacion: 'creacion' },
     });
   }
-  click(event: any) {}
+  click(event: any) {
+    const dialogRef = this.dialog.open(ModalNuevoPasadiaComponent, {
+      /* data: {
+        reservation: this.reservations.filter(
+          (elem) => elem.id == event.event.id
+        )[0],
+      }, */
+      data: {
+        operacion: 'actualizacion',
+        pasadia: this.pasadias.filter((elem) => elem.id == event.event.id)[0],
+      },
+    });
+  }
   obtenerTodosLosPasadias() {
     this.pasadiaService.obtenerPasadias().subscribe((data) => {
       this.pasadias = data;

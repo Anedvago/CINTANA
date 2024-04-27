@@ -23,7 +23,7 @@ export class PasadiaService {
     this.detectChangesInPasadias().subscribe(() => {
       this.supabaseClient
         .from('Pasadias')
-        .select('*,Customers (name)')
+        .select('*,Customers (*)')
         .then((data) => {
           changes.next(data.data);
         });
